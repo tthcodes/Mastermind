@@ -5,7 +5,7 @@
   "description": "LinkedIn Take-Home",
   "main": "index.js",
   "scripts": {
-    "node": "node src/server/server.js",
+    "node": "node -r dotenv/config src/server/server.js",
     "webpack": "webpack serve --mode development --open",
     "dev": "concurrently \"npm run node\" \"npm run webpack\""
   },
@@ -17,6 +17,8 @@
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.1.3",
     "express": "^4.19.2",
+    "mongodb": "^6.5.0",
+    "mongoose": "^8.3.1",
     "prettier": "^3.2.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

@@ -1,15 +1,26 @@
+import dotenv from 'dotenv';
+dotenv.config() // Load environment variables
+
 import express from 'express';
 import { fileURLToPath } from 'url';
 import path from 'path';
-import dotenv from 'dotenv'
+import connectToDB from './database.js';
 
-dotenv.config()
+
+// Environment variable validation
+if (!process.env.MONGODB_URI) {
+  console.error('ERR: Missing MONGODB_URI in environment');
+  process.exit(1);
+};
+
+const PORT = process.env.PORT || 3000;
 
 // Allows for use of filename and dirname such as in CommonJS
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
+connectToDB();
 
 app.use(express.json()); // parses incoming JSON data into Javascript code
 
@@ -41,8 +52,6 @@ app.use(
 
     return res.status(errorObj.status).json(errorObj.message);
   });
-
-const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)
