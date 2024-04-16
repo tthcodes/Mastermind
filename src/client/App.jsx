@@ -1,7 +1,11 @@
 import React from 'react';
 
-function App() {
-  return <h1>Hello from React</h1>;
-}
+const App = () => {
+  return (
+  <div>
+    <button>Start Game?</button>
+  </div>
+  );
+};
 
 export default App;
