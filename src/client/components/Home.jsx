@@ -2,7 +2,7 @@ import { Box, Typography } from '@mui/material'
 import { Button } from '@mui/joy'
 import { useNavigate } from 'react-router-dom'
 import React from 'react'
-import boxStyle from '../styling/boxStyle'
+import boxStyle from '../styling/BoxStyle'
 import buttonBoxStyle from '../styling/buttonBoxStyle'
 
 const Home = () => {

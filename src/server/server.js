@@ -5,6 +5,7 @@ import express from 'express';
 import { fileURLToPath } from 'url';
 import path from 'path';
 import connectToDB from './database.js';
+import apiRouter from './routes/apiRoutes';
 
 
 // Environment variable validation
@@ -12,6 +13,7 @@ if (!process.env.MONGODB_URI) {
   console.error('ERR: Missing MONGODB_URI in environment');
   process.exit(1);
 };
+
 
 const PORT = process.env.PORT || 3000;
 
@@ -22,10 +24,15 @@ const __dirname = path.dirname(__filename);
 const app = express();
 connectToDB();
 
+// General Middleware for Every Request 
+
 app.use(express.json()); // parses incoming JSON data into Javascript code
+app.use(express.urlencoded({ extended: true })); // parses incoming URL-encoded payload req's for form submission
+// Eventually will need to use session management 'express-session' with 'MongoStore' for session storage
+app.use(express.static(path.resolve(__dirname, '../static'))); // serve static files
 
-app.use(express.static(path.resolve(__dirname, '../static'))); //
-
+// Route handling
+app.use('/api', apiRouter)
 
 // Fallback route handler for home page
 app.get('/', (req, res) => {
