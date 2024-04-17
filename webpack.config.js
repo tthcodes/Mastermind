@@ -1,8 +1,12 @@
-const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+import path from 'path';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
+import { fileURLToPath } from 'url';
 
-module.exports = {
-  entry: './src/client/index.js',
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+export default {
+  entry: './src/client/index.jsx',
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js'
@@ -10,10 +14,13 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: {
-          loader: 'babel-loader'
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env', '@babel/preset-react']
+          }
         }
       },
       {
@@ -22,16 +29,31 @@ module.exports = {
       }
     ]
   },
+  resolve: {
+    extensions: ['.js', '.jsx'], // Now import statements without file extensions will also look for .jsx files
+  },  
   plugins: [
     new HtmlWebpackPlugin({
-      template: './static/index.html'
+      template: './src/static/index.html'
     })
   ],
   devServer: {
-    static: path.join(__dirname, 'public'),
-    port: 4000, // Dev server served on Port 4000
+    static: {
+      publicPath: '/build',
+      directory: path.resolve(__dirname, './build'),
+    },
+    host: 'localhost',
+    port: 4000,
+    open: true,
+    hot: true,
+    compress: true,
+    historyApiFallback: true,
     proxy: [{
-      '/api': 'http://localhost:3000' // Node server being run on Port 3000
-    }]
-  }
+      '/api/*': {
+        target: 'http://localhost:3000',
+        secure: false,
+      }
+    }],
+  },
+  mode: 'development'
 };
