@@ -10,8 +10,6 @@ import GuessSubmit from './GuessSubmit';
 
 const Play = () => {
   const navigate = useNavigate();
-  const [correctNumsCount, setCorrectNumsCount] = useState(0);
-  const [correctLocationsCount, setCorrectLocationsCount] = useState(0);
   const [nothingCorrect, setNothingCorrect] = useState(false);
   const [guessNum, setGuessNum] = useState(0);
   const [guessLog, setGuessLog] = useState([]);
@@ -41,22 +39,16 @@ const Play = () => {
   }, [minNum, maxNum, numCount]);
 
   // Helper function that checks if the game should continue (no more guesses) or (correct guess)
-    const isGameOver = (guess) => {
-      // Update guess count number every time this is invoked
-      setGuessNum(guessNum + 1);
-
-      // Check if guess was correct
-      if (guess === answer.join('')) {
+    const isGameOver = (newGuessCount) => {
+      // Only check for game over based on guess count
+      if (newGuessCount >= maxGuessCount) {
         navigate('/gameover', {
-          state: { winner: true, message: "Congratulations, you cracked the code!" },
-        })
-      }
-
-      else if (guessNum >= maxGuessCount) {
-        navigate('/gameover', {
-          state: { winner: false, message: "Sorry, better luck next time..."},
-        })
-      }
+          state: {
+            winner: false,
+            message: "Sorry, better luck next time..."
+          }
+        });
+      };
     };
 
   // Helper function that will get correct number and correct location stats 
@@ -78,8 +70,6 @@ const Play = () => {
           }
       });
 
-      console.log('Guess from getGuessAccuracy', guess, typeof guess, typeof guess[0])
-
       // Populate frequency maps for guess
       guessArr.forEach((num) => {
           guessFreqMap[num] = (guessFreqMap[num] || 0) + 1;
@@ -100,33 +90,42 @@ const Play = () => {
   // Create a function that check the user's submitted guess vs. answer and updates guessLog 
     const checkAnswer = async (guess) => {
       
-      // Convert guess to nums arr to compare answer arr
-      console.log('input guess to checkAnswer', guess)
+      // Convert guess str to nums arr to compare answer arr
       const guessArr = guess.split('').map(Number); // need to make sure guess comes in correct data form
-      console.log('guessArr:', guessArr)
       
+      // Console log invalid guess input + alert user non-numeric value was submitted. 
       if (!guessArr.every(Number.isFinite)) {
         console.error('Invalid guess input: guess contains non-numeric values.');
+        alert('Please only submit numeric values in guess.')
+        return;
+      };
+
+      // Check if the guess is correct
+      if (guessArr.join('') === answer.join('')) {
+        navigate('/gameover', {
+          state: {
+            winner: true,
+            message: "Congratulations, you cracked the code!"
+          }
+        });
         return;
       }
 
-      // Check if game should end based on answer and/or guess count
-      isGameOver();
-      
-      setNothingCorrect(false);
+      // Update guess count, check if new guess count ends game.
+      setGuessNum(prevCount => {
+        const newGuessCount = prevCount + 1;
+        isGameOver(newGuessCount); // Check if game should end
+        return newGuessCount;
+      });
 
       // Get accuracy stats for log display
-      const [guessCorrectNums, guessCorrectLocations] = getGuessAccuracy(guess, guessArr);
-
-      // Use guess stats info to set guessLog or set NoneCorrect to true
-      if (guessCorrectNums === 0 && guessCorrectLocations === 0) setNothingCorrect(true);
-
+      const [guessCorrectNums, guessCorrectLocations] = getGuessAccuracy(guess, answer);
+      
       // Update guessLog and guess accuracy state
-      setGuessLog((prevState) => {
-        return [...prevState, [guess, guessCorrectNums, guessCorrectLocations]];
-      });
-      setCorrectNumsCount(guessCorrectNums);
-      setCorrectLocationsCount(guessCorrectLocations);
+      setNothingCorrect(guessCorrectNums === 0 && guessCorrectLocations === 0);
+      console.log('correct answer:', answer, 'current guess', guessArr)
+      console.log('current correct nums', guessCorrectNums, 'currenct correct locs', guessCorrectLocations)
+      setGuessLog(prevState => [...prevState, [guessArr, guessCorrectNums, guessCorrectLocations]]);
     };
 
   // Create function that submits guess upon click 
@@ -158,6 +157,13 @@ const Play = () => {
         }}>
         <GuessLog guessLog = {guessLog} />
       </Box>
+      <Box>
+        <GuessSubmit
+          title = "Take a Guess!"
+          length = {numCount}
+          onFormSubmit = {submitGuess}
+        />
+      </Box>
       <Box sx={{
         display: 'flex',
         justifyContent: 'space-between',
@@ -171,13 +177,6 @@ const Play = () => {
         <Button variant="outlined" sx={{ alignSelf: 'flex-end' }}>
           Settings
         </Button>
-      </Box>
-      <Box>
-        <GuessSubmit
-          title = "Take a Guess!"
-          length = {numCount}
-          onFormSubmit = {submitGuess}
-        />
       </Box>
     </Box>
   );

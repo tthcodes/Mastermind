@@ -17,14 +17,19 @@ const GuessLog = ( { guessLog }) => {
         Guess Log
       </Typography>
       <List>
-        {guessLog.map((guess, index) => (
-          <ListItem key={index} divider>
-            <ListItemText
-              primary={`Guess ${index + 1}: ${guess[0]}`}
-              secondary={`Correct Numbers: ${guess[1]}, Correct Locations: ${guess[2]}`}
-            />
-          </ListItem>
-        ))}
+        {guessLog.map((el, index) => {
+          console.log('given el', el)
+          const [guess, correctNums, correctLocations] = el;
+          return (
+            <ListItem key={index} divider>
+              <ListItemText
+                primary={`Guess #${index + 1}: ${guess}`}
+                secondary={`Correct Numbers: ${correctNums}, Correct Locations: ${correctLocations}`}
+              />
+            </ListItem>
+            )
+          })
+          .reverse()}
       </List>
     </Box>
   );

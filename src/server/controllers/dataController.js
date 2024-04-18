@@ -17,7 +17,7 @@ const dataController = {
       
       // Convert plain text string of numbers into an array of integers
       const answerArray = response.data.trim().split('\n').map((char) => parseInt(char));
-      console.log(`Correct answer should be ${answerArray}`)
+      console.log(`Correct answer should be ${answerArray}`) // Keep for demo purposes.
       return res.status(200).json(answerArray);
     }
     catch (error) {
