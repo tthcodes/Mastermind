@@ -6,7 +6,11 @@ const defContext = {
   numCount: 4,
   setNumCount: () => {},
   maxGuessCount: 10,
-  setMaxGuessCount: () => {}
+  setMaxGuessCount: () => {},
+  minNum: 0,
+  setMinNum: () => {},
+  maxNum: 7,
+  setMaxNum: () => {}
 }
 
 //Create context

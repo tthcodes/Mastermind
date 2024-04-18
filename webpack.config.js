@@ -49,10 +49,11 @@ export default {
     compress: true,
     historyApiFallback: true,
     proxy: [{
-      '/api/*': {
-        target: 'http://localhost:3000',
-        secure: false,
-      }
+      context: ['/api/**'],
+      target: 'http://localhost:3000',
+      secure: false,
+      changeOrigin: true,
+      logLevel: 'debug'
     }],
   },
   mode: 'development'

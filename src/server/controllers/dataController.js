@@ -16,8 +16,8 @@ const dataController = {
       )
       
       // Convert plain text string of numbers into an array of integers
-      const answerArray = response.data.split('\t').map((char) => parseInt(char));
-
+      const answerArray = response.data.trim().split('\n').map((char) => parseInt(char));
+      console.log(`Correct answer should be ${answerArray}`)
       return res.status(200).json(answerArray);
     }
     catch (error) {
@@ -27,4 +27,4 @@ const dataController = {
   },
 };
 
-export default dataController
+export default dataController;

@@ -1,12 +1,33 @@
 import React from 'react'
-import { Box } from '@mui/material'
+import { Box, Typography, List, ListItem, ListItemText } from '@mui/material'
 
-const GuessLog = () => {
+const GuessLog = ( { guessLog }) => {
   return (
-    <Box>
-      Guess Logging Box
+    <Box sx={{ 
+      flexGrow: 1, 
+      overflowY: 'auto', 
+      maxHeight: '300px', 
+      width: '300px',
+      border: '1px solid gray', 
+      padding: 10,
+      boxShadow: 10
+      }}
+      >
+      <Typography variant="h4" gutterBottom>
+        Guess Log
+      </Typography>
+      <List>
+        {guessLog.map((guess, index) => (
+          <ListItem key={index} divider>
+            <ListItemText
+              primary={`Guess ${index + 1}: ${guess[0]}`}
+              secondary={`Correct Numbers: ${guess[1]}, Correct Locations: ${guess[2]}`}
+            />
+          </ListItem>
+        ))}
+      </List>
     </Box>
-  )
+  );
 }
 
 export default GuessLog

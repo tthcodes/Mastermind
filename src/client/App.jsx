@@ -11,6 +11,9 @@ const App = () => {
   const [answer, setAnswer] = useState([]);
   const [numCount, setNumCount] = useState(4);
   const [maxGuessCount, setMaxGuessCount] = useState(10);
+  const [minNum, setMinNum] = useState(0);
+  const [maxNum, setMaxNum] = useState(7);
+
 
   // Store State Variables In Object To Pass Down In Provider
   const value = {
@@ -19,7 +22,11 @@ const App = () => {
     numCount,
     setNumCount,
     maxGuessCount,
-    setMaxGuessCount
+    setMaxGuessCount,
+    minNum,
+    setMinNum,
+    maxNum,
+    setMaxNum
   };
 
   return (
