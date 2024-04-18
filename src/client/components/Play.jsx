@@ -1,12 +1,28 @@
-import { Box, Typography, List, ListItem, ListItemText } from '@mui/material'
+import { Box, Typography } from '@mui/material'
 import { Button } from '@mui/joy'
 import { useNavigate } from 'react-router-dom'
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
+import GameContext from '../contexts/GameContext'
 import boxStyle from '../styling/BoxStyle'
+import GuessLog from './GuessLog'
 
 const Play = () => {
   const navigate = useNavigate();
-  const [guess, setGuess] = useState([]);
+  const [correctNums, setCorrectNums] = useState(0);
+  const [correctLocations, setCorrectLocations] = useState(0);
+  const [guessNum, setGuessNum] = useState(0);
+  const [guessLog, setGuessLog] = useState([]);
+  const { answer, setAnswer, numCount, setNumCount, maxGuessCount } = useContext(GameContext);
+
+  // Create function that will get correct number and correct location counts here... unfinished
+  const getGuessAccuracy = (guess, answer) => {
+    let correctNums = 0;
+    let correctLocation = 0;
+    const guessFreq = {};
+    const answerFreq = {};
+  };
+
+  // Create function that will check current guess count against max guess count
 
   return (
     <Box sx={boxStyle}>
@@ -35,6 +51,7 @@ const Play = () => {
         }}>
         Mastermind
       </Typography>
+      <GuessLog guessLog = {guessLog} />
     </Box>
   );
 };
