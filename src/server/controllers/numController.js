@@ -1,14 +1,14 @@
 // Middleware for fetching randomly generated answer for Mastermind
 import axios from 'axios';
 
-const dataController = {
+const numController = {
   // Generate answer combination
   generateAnswer: async(req, res, next) => {
     try {
-      // Specify user request settings 
-      const length = String(req.query.length)
-      const min = String(req.query.min)
+      // Specify user request settings, user request fields sent as URL query fields
       const max = String(req.query.max)
+      const min = String(req.query.min)
+      const length = String(req.query.length)
 
       // Retrieve response body from random API
       const response = await axios.get(
@@ -20,11 +20,11 @@ const dataController = {
       console.log(`Correct answer should be ${answerArray}`) // Keep for demo purposes
       return res.status(200).json(answerArray);
     }
-    catch (error) {
-      console.error(`Error in dataController.generateAnswer: ${error}`)
-      return next(error)
+    catch (err) {
+      console.error(`Error in dataController.generateAnswer: ${err}`)
+      return next(err)
     }
   },
 };
 
-export default dataController;
+export default numController;

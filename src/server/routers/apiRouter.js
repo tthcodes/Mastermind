@@ -1,6 +1,6 @@
 // Router hub for calls to api
 import express from 'express';
-import dataController from '../controllers/dataController.js';
+import numController from '../controllers/numController.js';
 import { query } from 'express-validator' // new, prevents SQL injections and sanitizes
 //eventually import validationErrorHandler for considerations
 
@@ -12,7 +12,7 @@ apiRouter.get(
   query('length').isInt({ min: 2, max: 10}),
   query('min').isInt({ min: 0, max: 9}),
   query('max').isInt({ min: 1, max: 9}),
-  dataController.generateAnswer
+  numController.generateAnswer
 );
 
 // User-specific routes

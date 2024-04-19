@@ -5,7 +5,7 @@ import express from 'express';
 import { fileURLToPath } from 'url';
 import path from 'path';
 import connectToDB from './database.js';
-import apiRouter from './routes/apiRoutes.js';
+import apiRouter from './routers/apiRouter.js';
 
 
 // Environment variable validation

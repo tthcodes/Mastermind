@@ -8,7 +8,8 @@ const boxStyle = {
   width: '800px',
   height: '800px',
   borderRadius: '14px',
-  boxShadow: 20
+  boxShadow: 20,
+  border: '2px solid black'
 };
 
 export default boxStyle;
