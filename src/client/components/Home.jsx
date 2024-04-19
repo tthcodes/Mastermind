@@ -3,7 +3,6 @@ import { Button } from '@mui/joy'
 import { useNavigate } from 'react-router-dom'
 import React from 'react'
 import boxStyle from '../styling/BoxStyle'
-import buttonBoxStyle from '../styling/buttonBoxStyle'
 
 const Home = () => {
   // Eventually Will Use Contexts to check for Sign In Status
@@ -26,7 +25,18 @@ const Home = () => {
         onClick={() => navigate('/settings')}>
         Settings
       </Button>
-      <Box sx={buttonBoxStyle}>
+      <Box sx={{
+          display: 'flex',
+          justifyContent: 'flex-end',
+          alignItems: 'center',
+          width: '100%',
+          paddingRight: '2rem',
+          paddingTop: '2rem',
+          paddingBottom: '1rem',
+          marginTop: 'auto',
+          alignSelf:'flex-end',
+          gap: '5px'
+        }}>
         <Button size="sm" variant="outlined" onClick={() => navigate('/login')}>
           Log In
         </Button>

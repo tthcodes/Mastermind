@@ -5,6 +5,8 @@ import GameContext from './contexts/GameContext';
 const Home = lazy(() => import('./components/Home'))
 const Play = lazy(() => import('./components/Play'))
 const GameOver = lazy(() => import('./components/GameOver'))
+const SignUp = lazy(() => import('./components/Signup'))
+
 
 
 
@@ -15,7 +17,7 @@ const App = () => {
   const [maxGuessCount, setMaxGuessCount] = useState(10);
   const [minNum, setMinNum] = useState(0);
   const [maxNum, setMaxNum] = useState(7);
-
+  const [isSignedIn, setIsSignedIn] = useState(false);
 
   // Store State Variables In Object To Pass Down In Provider
   const value = {
@@ -28,7 +30,9 @@ const App = () => {
     minNum,
     setMinNum,
     maxNum,
-    setMaxNum
+    setMaxNum,
+    isSignedIn,
+    setIsSignedIn
   };
 
   return (
@@ -40,7 +44,7 @@ const App = () => {
           <Route path='/instructions' element={<Home />} />
           <Route path='/settings' element={<Home />} />
           <Route path='/login' element={<Home />} />
-          <Route path='/signup' element={<Home />} />
+          <Route path='/signup' element={<SignUp />} />
           <Route path='/gameover' element={<GameOver />} />
         </Routes>
       </Suspense>

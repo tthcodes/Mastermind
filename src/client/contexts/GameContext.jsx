@@ -10,7 +10,9 @@ const defContext = {
   minNum: 0,
   setMinNum: () => {},
   maxNum: 7,
-  setMaxNum: () => {}
+  setMaxNum: () => {},
+  isSignedIn: false,
+  setIsSignedIn: () => {}
 }
 
 //Create context

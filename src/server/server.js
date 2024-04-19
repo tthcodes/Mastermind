@@ -33,7 +33,7 @@ app.use(express.urlencoded({ extended: true })); // parses incoming URL-encoded 
 // Eventually will need to use session management 'express-session' with 'MongoStore' for session storage
 app.use(express.static(path.resolve(__dirname, '../static'))); // serve static files
 
-// Route handling
+// Route handling for all API requests
 app.use('/api', apiRouter)
 
 // Fallback route handler for home page

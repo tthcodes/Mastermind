@@ -79,7 +79,7 @@ const Play = () => {
           if (answerFreqMap[num]) {
               // Accounts for duplicates in answer combination.
               // Freq of a correct # in guessFreqMap will never be greater than the freq
-                // of that same number in answer combo (using Math.min)
+                // of that same number in answer combo (using Math.min), freq map wouldn't have duplicates
               numCorrect += Math.min(guessFreqMap[num], answerFreqMap[num]);
           }
       }
@@ -128,7 +128,8 @@ const Play = () => {
 
   // Create function that submits guess upon click 
     const submitGuess = (guessInput) => {
-      const guess = guessInput.join('');
+      const guess = guessInput.join(''); 
+      // guess is now a single string and passed into checkAnswer() as so
       checkAnswer(guess);
     };
 

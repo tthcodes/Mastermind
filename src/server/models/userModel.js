@@ -1,10 +1,9 @@
 import mongoose from 'mongoose';
-import bcrypt from 'bycrypt'
+import bcrypt from 'bcrypt'
 
 const { Schema } = mongoose;
 
 const userSchema = new Schema({
-  firstName: {type: String, required: false},
   username: {type: String, required: true, unique: true},
   password: {type: String, required: true},
   userScore: {type: Number, default: 0}

@@ -1,8 +1,9 @@
-// Router hub for calls to api
+// Router hub for all calls to api
 import express from 'express';
 import numController from '../controllers/numController.js';
 import { query } from 'express-validator' // new, prevents SQL injections and sanitizes
 //eventually import validationErrorHandler for considerations
+import userRouter from './userRouter.js';
 
 const apiRouter = express.Router();
 
@@ -15,8 +16,9 @@ apiRouter.get(
   numController.generateAnswer
 );
 
-// User-specific routes
+// User-specific routes, /api/user
+apiRouter.use('/user', userRouter);
 
-// Authentication routes
+// Session-related routes
 
 export default apiRouter;
