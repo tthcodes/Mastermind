@@ -7,24 +7,37 @@ const GuessLog = ( { guessLog }) => {
       flexGrow: 1, 
       overflowY: 'auto', 
       maxHeight: '300px', 
-      width: '300px',
+      height: '500px',
+      width: '400px',
       border: '1px solid gray', 
-      padding: 10,
+      padding: 2,
       boxShadow: 10
       }}
       >
-      <Typography variant="h4" gutterBottom>
+      <Typography 
+        variant="h5"
+        gutterBottom
+        sx={{
+          textAlign: 'center',
+          fontFamily: 'bungee',
+          flexGrow: 1
+        }}>
         Guess Log
       </Typography>
       <List>
         {guessLog.map((el, index) => {
-          console.log('given el', el)
           const [guess, correctNums, correctLocations] = el;
+          let secondary;
+          if(correctNums === 0) {
+            secondary = 'All numbers incorrect.'
+          } else {
+            secondary = `Correct Numbers: ${correctNums}, Correct Locations: ${correctLocations}`
+          };
           return (
             <ListItem key={index} divider>
               <ListItemText
                 primary={`Guess #${index + 1}: ${guess}`}
-                secondary={`Correct Numbers: ${correctNums}, Correct Locations: ${correctLocations}`}
+                secondary={secondary}
               />
             </ListItem>
             )

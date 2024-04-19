@@ -10,10 +10,9 @@ import GuessSubmit from './GuessSubmit';
 
 const Play = () => {
   const navigate = useNavigate();
-  const [nothingCorrect, setNothingCorrect] = useState(false);
-  const [guessNum, setGuessNum] = useState(0);
+  const [guessCount, setGuessCount] = useState(0);
   const [guessLog, setGuessLog] = useState([]);
-  const { answer, setAnswer, numCount, setNumCount, maxGuessCount, minNum, maxNum } = useContext(GameContext);
+  const { answer, setAnswer, numCount, maxGuessCount, minNum, maxNum } = useContext(GameContext);
 
   // useEffect that will generate the correct answer on page load
   useEffect(() => {
@@ -65,7 +64,7 @@ const Play = () => {
         // correct places within guess by holding onto the index of answer array
       answer.forEach((num, index) => {
           answerFreqMap[num] = (answerFreqMap[num] || 0) + 1;
-          if (num === guess[index]) {
+          if (num === guessArr[index]) {
               numCorrectLocation++;
           }
       });
@@ -112,9 +111,9 @@ const Play = () => {
       }
 
       // Update guess count, check if new guess count ends game.
-      setGuessNum(prevCount => {
+      setGuessCount(prevCount => {
         const newGuessCount = prevCount + 1;
-        isGameOver(newGuessCount); // Check if game should end
+        isGameOver(newGuessCount); // Check if game should end based on guessCount
         return newGuessCount;
       });
 
@@ -122,9 +121,8 @@ const Play = () => {
       const [guessCorrectNums, guessCorrectLocations] = getGuessAccuracy(guess, answer);
       
       // Update guessLog and guess accuracy state
-      setNothingCorrect(guessCorrectNums === 0 && guessCorrectLocations === 0);
       console.log('correct answer:', answer, 'current guess', guessArr)
-      console.log('current correct nums', guessCorrectNums, 'currenct correct locs', guessCorrectLocations)
+      console.log('current correct nums', guessCorrectNums, 'current correct locs', guessCorrectLocations)
       setGuessLog(prevState => [...prevState, [guessArr, guessCorrectNums, guessCorrectLocations]]);
     };
 
@@ -150,8 +148,8 @@ const Play = () => {
       <Box sx={{
         display: 'flex',
         flexDirection: 'column', 
-        alignItems: 'center', // Centers the child components horizontally
-        justifyContent: 'center', // Centers the child components vertically
+        alignItems: 'center',
+        justifyContent: 'center', 
         flexGrow: 1, 
         width: '100%', 
         }}>
@@ -162,6 +160,7 @@ const Play = () => {
           title = "Take a Guess!"
           length = {numCount}
           onFormSubmit = {submitGuess}
+          guessCount = {guessCount}
         />
       </Box>
       <Box sx={{
@@ -171,10 +170,10 @@ const Play = () => {
         marginTop: '3%',
         mb: 3
       }}>
-        <Button variant="outlined" sx={{ alignSelf: 'flex-start' }} onClick={() => navigate('/instructions')}>
+        <Button variant="outlined" sx={{ alignSelf: 'flex-start' }} onClick={() => navigate('/')}>
           Back
         </Button>
-        <Button variant="outlined" sx={{ alignSelf: 'flex-end' }}>
+        <Button variant="outlined" sx={{ alignSelf: 'flex-end' }} onClick={() => navigate('/settings')}>
           Settings
         </Button>
       </Box>

@@ -4,6 +4,8 @@ import GameContext from './contexts/GameContext';
 //Use dynamic imports using React.lazy for components associated with routes
 const Home = lazy(() => import('./components/Home'))
 const Play = lazy(() => import('./components/Play'))
+const GameOver = lazy(() => import('./components/GameOver'))
+
 
 
 const App = () => {
@@ -34,11 +36,12 @@ const App = () => {
       <Suspense fallback={<div>Game Loading...</div>}>
         <Routes>
           <Route path='/' element={<Home />} />
+          <Route path='/play' element={<Play />} />
+          <Route path='/instructions' element={<Home />} />
+          <Route path='/settings' element={<Home />} />
           <Route path='/login' element={<Home />} />
           <Route path='/signup' element={<Home />} />
-          <Route path='/play' element={<Play />} />
-          <Route path='/settings' element={<Home />} />
-          <Route path='/instructions' element={<Home />} />
+          <Route path='/gameover' element={<GameOver />} />
         </Routes>
       </Suspense>
     </GameContext.Provider>

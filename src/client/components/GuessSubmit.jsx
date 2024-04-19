@@ -1,9 +1,12 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useContext } from 'react';
 import { Box, TextField, Button, Typography } from '@mui/material';
+import GameContext from '../contexts/GameContext';
 
-const GuessSubmit = ({ title, length, onFormSubmit }) => {
+
+const GuessSubmit = ({ title, length, onFormSubmit, guessCount }) => {
   const [inputs, setInputs] = useState(Array(length).fill(''));
-  const inputRefs = useRef([]);
+  const inputRefs = useRef([]); // new concept
+  const { maxGuessCount } = useContext(GameContext);
 
   const handleInputChange = (index, value) => {
     const newInputs = [...inputs];
@@ -31,10 +34,19 @@ const GuessSubmit = ({ title, length, onFormSubmit }) => {
       component="form"
       onSubmit={handleSubmit}
       noValidate
-      sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2, p: 2 }}
+      sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 0.3, p: 2 }}
     >
       <Typography variant="h5">{title}</Typography>
-      <Box sx={{ display: 'flex', gap: 1 }}>
+      <Typography 
+        variant='subtitle1'
+        sx={{
+          textAlign: 'center',
+          mb: 1,
+          fontSize: '1rem'
+        }}>
+          Guesses Remaining: {maxGuessCount - guessCount}
+        </Typography>
+      <Box sx={{ display: 'flex', gap: 1, marginBottom: 2 }}>
         {inputs.map((input, index) => (
           <TextField
             key={index}
