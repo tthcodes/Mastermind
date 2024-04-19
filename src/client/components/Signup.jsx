@@ -13,7 +13,7 @@ const SignUp = () => {
   const [birthMonth, setBirthMonth] = useState('');
   const [birthDay, setBirthDay] = useState('');
   const [birthYear, setBirthYear] = useState('');
-  const [error, setError] = useState('');
+  const [error, setError] = useState(''); // LOOK INTO IF YOU'RE USING ERROR HERE RIGHT!!
 
   // Populate options in dropdowns for user to select birthday
     //(_, i) is beginning of mapping function, first param serves as field placeholder, i is index of current val (begins at 0)
@@ -22,25 +22,40 @@ const SignUp = () => {
   const currentYear = new Date().getFullYear(); // Grab current date's year to as starting point for age in years
   const years = Array.from({ length: 100 }, (_, i) => currentYear - i); // Get options beginning from current year
 
-  const handleSignUp = (event) => {
+  // Function to handle submission of account info for creation
+  const handleSignUp = async (event) => {
     event.preventDefault();
+
+    // Ensure all required fields are filled
+    if (!username || !password || !birthMonth || !birthDay || !birthYear) {
+      setError('Please fill in all fields.');
+      return;
+    }
+    
     // Utilize user's input birthday state variables to calculate age
     const userBirthday = new Date(birthYear, birthMonth - 1, birthDay); // Date object based on user bday
     const ageDiff = Date.now() - userBirthday.getTime(); // Calculates diff between birth and current date in ms
     const ageDate = new Date(ageDiff); // Creates new date object from age diff in ms
     const userAge = Math.abs(ageDate.getUTCFullYear() - 1970) // Grab year from age diff, subtract 1970 due to Unix Epoch
     
-    if (!username || !password || !birthMonth || !birthDay || !birthYear) {
-      setError('Please fill in all fields.');
-      return;
-    }
-
+    // Verify user is at least 13 years old (considers COPPA, privacy act for children under 13)
     if (userAge < 13) {
       setError('You must be at least 13 years old to create an account.');
       return;
     }
 
+    // Prepare account data to send to backend for creation
+    const userAccountData = {
+      username,
+      password
+    };
+
+    // POST request to create account for user
     try {
+      const response = await axios.post('/api/user/sign-up', userAccountData);
+      console.log('Server response:', response.data)
+      alert('Account created! Please log in to access your account.')
+      navigate('/');
 
     } catch (err) {
       console.error('Error during signup:', err);

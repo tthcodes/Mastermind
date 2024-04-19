@@ -9,6 +9,6 @@ const userRouter = express.Router();
 // Display user name on HomePage, and GameOver if logged in
 // Calculate total earned points w/ every win that also updates user score. 
 
-// userRouter.post('/sign-up', userController.signUp);
+userRouter.post('/sign-up', userController.signUp);
 
 export default userRouter;
