@@ -3,7 +3,7 @@ import { Box, TextField, Button, Typography } from '@mui/material';
 import GameContext from '../contexts/GameContext';
 
 
-const GuessSubmit = ({ title, length, onFormSubmit, guessCount }) => {
+const GuessSubmit = ({ length, onFormSubmit, guessCount }) => {
   const [inputs, setInputs] = useState(Array(length).fill(''));
   const inputRefs = useRef([]); // new concept
   const { maxGuessCount } = useContext(GameContext);
@@ -36,7 +36,7 @@ const GuessSubmit = ({ title, length, onFormSubmit, guessCount }) => {
       noValidate
       sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 0.3, p: 2 }}
     >
-      <Typography variant="h5">{title}</Typography>
+      <Typography variant="h5">Take a Guess!</Typography>
       <Typography 
         variant='subtitle1'
         sx={{

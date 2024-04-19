@@ -26,7 +26,7 @@ const GuessLog = ( { guessLog }) => {
       </Typography>
       <List>
         {guessLog.map((el, index) => {
-          const [guess, correctNums, correctLocations] = el;
+          const [guess, correctNums, correctLocations] = el; // el = [[curr guess arr], correctNums, correctLocations]
           let secondary;
           if(correctNums === 0) {
             secondary = 'All numbers incorrect.'

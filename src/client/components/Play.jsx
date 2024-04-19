@@ -2,9 +2,9 @@ import { Box, Typography } from '@mui/material';
 import { Button } from '@mui/joy';
 import { useNavigate } from 'react-router-dom';
 import React, { useState, useEffect, useContext } from 'react';
+import boxStyle from '../styling/BoxStyle';
 import axios from 'axios';
 import GameContext from '../contexts/GameContext';
-import boxStyle from '../styling/BoxStyle';
 import GuessLog from './GuessLog';
 import GuessSubmit from './GuessSubmit';
 
@@ -14,19 +14,19 @@ const Play = () => {
   const [guessLog, setGuessLog] = useState([]);
   const { answer, setAnswer, numCount, maxGuessCount, minNum, maxNum } = useContext(GameContext);
 
-  // useEffect that will generate the correct answer on page load
+  // useEffect that will generate new correct answer on page load or change in min, max, answer length
   useEffect(() => {
     const generateAnswer = async () => {
       try {
-        const response = await axios.get(
-          `/api/generate-answer/?length=${numCount}&min=${minNum}&max=${maxNum}`
-        );
+        // Get request to api, passing answer count + minValue + maxValue as req.query parameters
+        const response = await axios.get(`/api/generate-answer/?length=${numCount}&min=${minNum}&max=${maxNum}`);
         
-        //Defensive check for if we do not get back the generated answer in num array form
-
+        // Defensive check for if we do not get back the generated answer in num array form
         if (Array.isArray(response.data) && response.data.length > 0) {
-          setAnswer(response.data);
-          console.log(`Answer state updated to: ${response.data}`)
+
+          setAnswer(response.data); // Update answer state
+          console.log(`Answer state updated to: ${response.data}`) 
+
         } else {
           throw new Error('Invalid data format received')
         }
@@ -34,12 +34,12 @@ const Play = () => {
         console.error(`Error in generating answer combination: ${error}`);
       }
     };
+    // Invoke generate answer function 
     generateAnswer();
   }, [minNum, maxNum, numCount]);
 
-  // Helper function that checks if the game should continue (no more guesses) or (correct guess)
+  // Helper function that checks if the game should end (user has no more guesses)
     const isGameOver = (newGuessCount) => {
-      // Only check for game over based on guess count
       if (newGuessCount >= maxGuessCount) {
         navigate('/gameover', {
           state: {
@@ -120,9 +120,9 @@ const Play = () => {
       // Get accuracy stats for log display
       const [guessCorrectNums, guessCorrectLocations] = getGuessAccuracy(guess, answer);
       
-      // Update guessLog and guess accuracy state
-      console.log('correct answer:', answer, 'current guess', guessArr)
-      console.log('current correct nums', guessCorrectNums, 'current correct locs', guessCorrectLocations)
+      // Update guessLog
+      console.log('correct answer:', answer, 'current guess:', guessArr)
+      console.log('current correct nums:', guessCorrectNums, 'current correct locs:', guessCorrectLocations)
       setGuessLog(prevState => [...prevState, [guessArr, guessCorrectNums, guessCorrectLocations]]);
     };
 
@@ -157,10 +157,9 @@ const Play = () => {
       </Box>
       <Box>
         <GuessSubmit
-          title = "Take a Guess!"
-          length = {numCount}
           onFormSubmit = {submitGuess}
           guessCount = {guessCount}
+          length = {numCount}
         />
       </Box>
       <Box sx={{
