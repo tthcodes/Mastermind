@@ -12,7 +12,7 @@ const userSchema = new Schema({
 // Hash user password before saving
 userSchema.pre('save', async function(next) {
   if (this.isModified('password') || this.isNew) { // Check for when pw modified or not yet saved
-    this.password = await bcrypt.hash(this.password, 12); // Async hash oif pw with salt round of 12
+    this.password = await bcrypt.hash(this.password, 12); // Async hash of pw with salt round of 12
   }
   next();
 });

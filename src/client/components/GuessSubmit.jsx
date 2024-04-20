@@ -21,9 +21,15 @@ const GuessSubmit = ({ length, onFormSubmit, guessCount }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    
     if (inputs.every(input => input)) {
       onFormSubmit(inputs);
       setInputs(Array(length).fill('')); // Reset inputs after submit
+
+    // Focus the first input after resetting
+    if (inputRefs.current[0]) {
+      inputRefs.current[0].focus();
+    }
     } else {
       alert('Please fill all the inputs correctly.');
     }

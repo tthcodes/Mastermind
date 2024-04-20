@@ -10,8 +10,7 @@ const GuessLog = ( { guessLog }) => {
       height: '500px',
       width: '400px',
       border: '1px solid gray', 
-      padding: 2,
-      boxShadow: 10
+      padding: 2
       }}
       >
       <Typography 

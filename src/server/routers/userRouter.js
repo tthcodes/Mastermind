@@ -10,5 +10,6 @@ const userRouter = express.Router();
 // Calculate total earned points w/ every win that also updates user score. 
 
 userRouter.post('/sign-up', userController.signUp);
+userRouter.post('/login', userController.signIn);
 
 export default userRouter;

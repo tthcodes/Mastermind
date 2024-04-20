@@ -51,38 +51,44 @@ const Play = () => {
     };
 
   // Helper function that will get correct number and correct location stats 
-    const getGuessAccuracy = (guess, answer) => {
+    const getGuessAccuracy = (guessStr, answerArr) => {
       // Convert input guess string into array of nums
-      const guessArr = guess.split('').map(Number);
-      // Init correct nums, correct locations, and freq maps for guess and answer
-      let answerFreqMap = {};
-      let guessFreqMap = {};
-      let numCorrect = 0;
-      let numCorrectLocation = 0;
+      const guessArr = guessStr.split('').map(Number);
 
-      // Populate frequency map for answer, while also cross checking correct nums in
-        // correct places within guess by holding onto the index of answer array
-      answer.forEach((num, index) => {
-          answerFreqMap[num] = (answerFreqMap[num] || 0) + 1;
-          if (num === guessArr[index]) {
-              numCorrectLocation++;
-          }
-      });
+      // Init correct num count and correct location count at 0
+      let numbersCorrect = 0;
+      let locationsCorrect = 0;
 
-      // Populate frequency maps for guess
+      // Dicts to track freq of each num in guess and answer
+      let freqInAnswer = {};
+      let freqInGuess = {};
+
+      // Populate frequency dict for guess
       guessArr.forEach((num) => {
-          guessFreqMap[num] = (guessFreqMap[num] || 0) + 1;
+          freqInGuess[num] = (freqInGuess[num] || 0) + 1;
+      });
+      
+      // Populate frequency dict for answer
+      answerArr.forEach((num, index) => {
+          freqInAnswer[num] = (freqInAnswer[num] || 0) + 1;
+          
+          // Directly compare numbers between guessArr and answerArr at same index to update location
+          if (num === guessArr[index]) {
+              locationsCorrect++;
+          }
       });
 
-      // Calculate correct numbers that are not necessarily in the correct location
-      for (const num in guessFreqMap) {
+      // Calculate correct numbers, regardless of position
+      Object.keys(freqInGuess).forEach((num) => {
+        // If num key in guess dict exists as key in answer dict, update correct nums 
           if (answerFreqMap[num]) {
-              // Accounts for duplicates in answer combination.
-              // Freq of a correct # in guessFreqMap will never be greater than the freq
-                // of that same number in answer combo (using Math.min), freq map wouldn't have duplicates
-              numCorrect += Math.min(guessFreqMap[num], answerFreqMap[num]);
+
+          // Freq of a correct # in guess dict will never be greater than freq in answer dict, use Math.min()
+              numbersCorrect += Math.min(freqInGuess[num], freqInAnswer[num]);
           }
-      }
+      });
+
+      // Return both count of correct nums and count of correct locations
       return [numCorrect, numCorrectLocation];
     };
 
