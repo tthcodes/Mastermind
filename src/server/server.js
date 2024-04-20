@@ -7,6 +7,8 @@ import path from 'path';
 import connectToDB from './database.js';
 import apiRouter from './routers/apiRouter.js';
 
+// Check environment mode
+const isProduction = process.env.NODE_ENV === 'production'
 
 // Environment variable validation
 if (!process.env.MONGODB_URI) {
@@ -15,7 +17,6 @@ if (!process.env.MONGODB_URI) {
 };
 
 
-const PORT = process.env.PORT || 3000;
 
 // Allows for use of filename and dirname such as in CommonJS
 const __filename = fileURLToPath(import.meta.url);
@@ -26,11 +27,9 @@ const app = express();
 // Connect to MongoDB Database
 connectToDB();
 
-// General Middleware for Every Request 
-
+// General Middleware for all environments
 app.use(express.json()); // parses incoming JSON data into Javascript code
 app.use(express.urlencoded({ extended: true })); // parses incoming URL-encoded payload req's for form submission
-// Eventually will need to use session management 'express-session' with 'MongoStore' for session storage
 app.use(express.static(path.resolve(__dirname, '../static'))); // serve static files
 
 // Route handling for all API requests
@@ -44,23 +43,21 @@ app.get('/', (req, res) => {
 app.use((req, res) => res.sendStatus(404)); 
 
 //Error handling middleware, ensure all errors call next(err) to trigger
-app.use(
-  (err, req, res, _next) => {
+  //Make sure middleware sends err object containing more info on error for debugging
+app.use((err, req, res, _next) => {
+    
     const defaultErr = {
       log: 'Error caught in global handler',
-      status: 500,
-      message: { err: 'An error occurred' }
+      status: err.status || 500,
+      message: err.message || { err: 'An error occurred' }
     };
-
-    const errorObj = Object.assign({}, defaultErr, {
-      message: { err: err.message || 'An error has occurred' }
-    });
-
-    console.log(errorObj.log);
-    console.log(err);
-
-    return res.status(errorObj.status).json(errorObj.message);
+    
+    console.log(err.log || 'Unspecified middleware error')
+    
+    return res.status(defaultErr.status).json({ message: defaultErr.message });
   });
+
+const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)

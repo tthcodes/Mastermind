@@ -13,7 +13,7 @@ const SignUp = () => {
   const [birthMonth, setBirthMonth] = useState('');
   const [birthDay, setBirthDay] = useState('');
   const [birthYear, setBirthYear] = useState('');
-  const [error, setError] = useState(''); // LOOK INTO IF YOU'RE USING ERROR HERE RIGHT!!
+  const [error, setError] = useState(''); 
 
   // Populate options in dropdowns for user to select birthday
     //(_, i) is beginning of mapping function, first param serves as field placeholder, i is index of current val (begins at 0)
@@ -53,22 +53,33 @@ const SignUp = () => {
     // POST request to create account for user
     try {
       const response = await axios.post('/api/user/sign-up', userAccountData);
-      console.log('Server response:', response.data)
       alert('Account created! Please log in to access your account.')
       navigate('/');
 
     } catch (err) {
       console.error('Error during signup:', err);
-      setError('Failed to sign up.')
+      
+      // If server sends back unique key error, alert client that their username isn't unique
+      if(err.response && err.response.status === 409) {
+        setError(err.response.data.message);
+      } else {
+        setError('Failed to sign up.');
+      }
     }
   }
 
   return (
-    <Box sx={boxStyle}>
+    <Box sx={{
+      ...boxStyle,
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'flex-start',
+      }}>
       <Typography variant="h2" component="h1" sx={{ color: 'black', fontWeight: 'bold', textAlign: 'center', marginTop: 20, fontFamily: 'bungee'}}>
         Mastermind
       </Typography>
-      <form onSubmit={handleSignUp} style={{ width: '60%', display: 'flex', flexDirection: 'column', gap: 2 }}>
+      <form onSubmit={handleSignUp} style={{ width: '60%', display: 'flex', flexDirection: 'column', gap: '8px' }}>
         <TextField
           label="Username"
           variant="outlined"
@@ -85,9 +96,9 @@ const SignUp = () => {
           />
         <Typography
           variant="subtitle1"
-          textAlign="center"
-        >
-          Date of Birth</Typography>
+          textAlign="center">
+          Date of Birth
+        </Typography>
         <Box sx={{ display: 'flex', gap: 2 }}>
           <FormControl fullWidth>
             <InputLabel>Month</InputLabel>
@@ -95,7 +106,13 @@ const SignUp = () => {
               value={birthMonth}
               label="Month"
               onChange={(e) => setBirthMonth(e.target.value)}
-            >
+              MenuProps={{
+                PaperProps: {
+                  style: {
+                    maxHeight: 200,
+                  }
+                }
+              }}>
               {months.map(month => ( // Map over months array to populate select options
                 <MenuItem key={month} value={month}>{month}</MenuItem> // New menu item per element
               ))}
@@ -107,7 +124,13 @@ const SignUp = () => {
               value={birthDay}
               label="Day"
               onChange={(e) => setBirthDay(e.target.value)}
-            >
+              MenuProps={{
+                PaperProps: {
+                  style: {
+                    maxHeight: 200,
+                  }
+                }
+              }}>
               {days.map(day => (
                 <MenuItem key={day} value={day}>{day}</MenuItem>
               ))}
@@ -119,7 +142,13 @@ const SignUp = () => {
               value={birthYear}
               label="Year"
               onChange={(e) => setBirthYear(e.target.value)}
-            >
+              MenuProps={{
+                PaperProps: {
+                  style: {
+                    maxHeight: 200,
+                  }
+                }
+              }}>
               {years.map(year => (
                 <MenuItem key={year} value={year}>{year}</MenuItem>
               ))}
@@ -131,8 +160,11 @@ const SignUp = () => {
             {error}
           </Typography>
         )}
-        <Button type="submit" variant="outlined" sx={{ mt: 2 }}>
+        <Button type="submit" sx={{ mt: 2 }}>
           Sign Up
+        </Button>
+        <Button onClick={() => navigate('/')}>
+          Home
         </Button>
       </form>
     </Box>

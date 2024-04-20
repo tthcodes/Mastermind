@@ -5,9 +5,9 @@
   "description": "LinkedIn Take-Home",
   "main": "index.js",
   "scripts": {
-    "node": "nodemon",
-    "webpack": "webpack serve --mode development --open",
-    "dev": "concurrently \"npm run node\" \"npm run webpack\""
+    "start": "node -r dotenv/config src/server/server.js",
+    "dev": "concurrently \"nodemon -r dotenv/config --exec babel-node src/server/server.js\" \"webpack serve --mode development --open\"",
+    "build": "webpack --mode production"
   },
   "author": "",
   "license": "ISC",
@@ -33,6 +33,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.24.4",
+    "@babel/node": "^7.23.9",
     "@babel/preset-env": "^7.24.4",
     "@babel/preset-react": "^7.24.1",
     "babel-loader": "^9.1.3",
