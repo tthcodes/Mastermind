@@ -1,0 +1,8 @@
+{
+  "delay": "2000",
+  "ext": "js,json",
+  "ignore": ["node_modules"],
+  "exec": "node -r dotenv/config src/server/server.js",
+  "watch": ["src/server"],
+  "verbose": true
+}

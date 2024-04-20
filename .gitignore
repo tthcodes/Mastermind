@@ -1,2 +1,14 @@
+# Dependencies
 node_modules/
+
+# OS Generated Files
+.DS_Store
+
+# Environment variables
 .env
+
+# Secret key generation script for sessions
+generateKey.mjs
+
+# Ignore directory where build artifacts made
+dist/
