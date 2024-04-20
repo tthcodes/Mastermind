@@ -22,6 +22,7 @@ const Play = () => {
         const response = await axios.get(`/api/generate-answer/?length=${numCount}&min=${minNum}&max=${maxNum}`);
         
         // Defensive check for if we do not get back the generated answer in num array form
+        console.log('DATA RESPONSE WHEN GETTING ANSWER:', response.data)
         if (Array.isArray(response.data) && response.data.length > 0) {
 
           setAnswer(response.data); // Update answer state
@@ -81,7 +82,7 @@ const Play = () => {
       // Calculate correct numbers, regardless of position
       Object.keys(freqInGuess).forEach((num) => {
         // If num key in guess dict exists as key in answer dict, update correct nums 
-          if (answerFreqMap[num]) {
+          if (freqInAnswer[num]) {
 
           // Freq of a correct # in guess dict will never be greater than freq in answer dict, use Math.min()
               numbersCorrect += Math.min(freqInGuess[num], freqInAnswer[num]);
@@ -89,7 +90,7 @@ const Play = () => {
       });
 
       // Return both count of correct nums and count of correct locations
-      return [numCorrect, numCorrectLocation];
+      return [numbersCorrect, locationsCorrect];
     };
 
   // Create a function that check the user's submitted guess vs. answer and updates guessLog 

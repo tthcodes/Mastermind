@@ -9,3 +9,6 @@ node_modules/
 
 # Secret key generation script for sessions
 generateKey.mjs
+
+# Ignore directory where build artifacts made
+dist/

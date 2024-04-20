@@ -1,5 +1,6 @@
 import path from 'path';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
+import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -35,7 +36,8 @@ export default {
   plugins: [
     new HtmlWebpackPlugin({
       template: './src/static/index.html'
-    })
+    }),
+    new CleanWebpackPlugin(),
   ],
   devServer: {
     static: {
@@ -47,7 +49,7 @@ export default {
     open: true,
     hot: true,
     compress: true,
-    historyApiFallback: true,
+    historyApiFallback: false,
     proxy: [{
       context: ['/api/**'],
       target: 'http://localhost:3000',

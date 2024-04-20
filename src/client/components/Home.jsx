@@ -52,8 +52,8 @@ const Home = () => {
           marginTop: 'auto',
           alignSelf:'flex-end',
           gap: '5px'}}>
-              <Button size="sm" variant="outlined" onClick={() => navigate('/')}>
-                Account
+              <Button size="sm" variant="outlined" onClick={() => navigate('/profile')}>
+                Profile
               </Button>
               <Button size="sm" variant="outlined" onClick={handleLogout}>
                 Log Out
