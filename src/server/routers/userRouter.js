@@ -1,6 +1,7 @@
 // Router for requests related to the user
 import express from 'express';
 import userController from '../controllers/userController.js';
+import authController from '../controllers/authController.js';
 
 const userRouter = express.Router();
 
@@ -10,6 +11,8 @@ const userRouter = express.Router();
 // Calculate total earned points w/ every win that also updates user score. 
 
 userRouter.post('/sign-up', userController.signUp);
-userRouter.post('/login', userController.signIn);
+userRouter.post('/login', userController.signIn, authController.verifySession);
+userRouter.post('/logout', userController.logout);
+
 
 export default userRouter;

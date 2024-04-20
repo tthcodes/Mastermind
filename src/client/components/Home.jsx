@@ -1,12 +1,27 @@
 import { Box, Typography } from '@mui/material'
 import { Button } from '@mui/joy'
 import { useNavigate } from 'react-router-dom'
-import React from 'react'
+import React, { useContext } from 'react'
 import boxStyle from '../styling/BoxStyle'
+import GameContext from '../contexts/GameContext'
+import axios from 'axios'
 
 const Home = () => {
-  // Eventually Will Use Contexts to check for Sign In Status
+  const {isSignedIn, setIsSignedIn} = useContext(GameContext)
   const navigate = useNavigate();
+
+  const handleLogout = async() => {
+    try {
+      const response = await axios.post('/api/user/logout');
+      if (response.status === 200) {
+        setIsSignedIn(false) // Update login state
+        alert(response.data.message); // Show server message
+      }
+    } catch (error) {
+      alert('Log out unsuccessful');
+      console.error(error);
+    }
+  }
 
   return (
     <Box sx={boxStyle}>
@@ -25,7 +40,8 @@ const Home = () => {
         onClick={() => navigate('/settings')}>
         Settings
       </Button>
-      <Box sx={{
+      {isSignedIn ? (
+        <Box sx={{
           display: 'flex',
           justifyContent: 'flex-end',
           alignItems: 'center',
@@ -35,16 +51,33 @@ const Home = () => {
           paddingBottom: '1rem',
           marginTop: 'auto',
           alignSelf:'flex-end',
-          gap: '5px'
-        }}>
-        <Button size="sm" variant="outlined" onClick={() => navigate('/login')}>
-          Log In
-        </Button>
-        <Button size="sm" variant="outlined" onClick={() => navigate('/signup')}>
-          Sign Up
-        </Button>
+          gap: '5px'}}>
+              <Button size="sm" variant="outlined" onClick={() => navigate('/')}>
+                Account
+              </Button>
+              <Button size="sm" variant="outlined" onClick={handleLogout}>
+                Log Out
+              </Button>
+        </Box>) : (
+          <Box sx={{
+            display: 'flex',
+            justifyContent: 'flex-end',
+            alignItems: 'center',
+            width: '100%',
+            paddingRight: '2rem',
+            paddingTop: '2rem',
+            paddingBottom: '1rem',
+            marginTop: 'auto',
+            alignSelf:'flex-end',
+            gap: '5px'}}>
+            <Button size="sm" variant="outlined" onClick={() => navigate('/login')}>
+              Log In
+            </Button>
+            <Button size="sm" variant="outlined" onClick={() => navigate('/signup')}>
+              Sign Up
+            </Button>
+          </Box>)}
       </Box>
-    </Box>
   );
 };
 

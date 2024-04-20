@@ -1,13 +1,14 @@
 // Router hub for all calls to api
 import express from 'express';
 import numController from '../controllers/numController.js';
+import authController from '../controllers/authController.js';
 import { query } from 'express-validator' // new, prevents SQL injections and sanitizes
 //eventually import validationErrorHandler for considerations
 import userRouter from './userRouter.js';
 
 const apiRouter = express.Router();
 
-// Data-specific routes
+// Number API-specific routes
 apiRouter.get(
   '/generate-answer/',
   query('length').isInt({ min: 2, max: 10}),
@@ -20,5 +21,6 @@ apiRouter.get(
 apiRouter.use('/user', userRouter);
 
 // Session-related routes
+apiRouter.get('/auth/verify-session', authController.verifySession);
 
 export default apiRouter;

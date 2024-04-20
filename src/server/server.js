@@ -34,12 +34,12 @@ app.use(express.json()); // parses incoming JSON data into Javascript code
 app.use(express.urlencoded({ extended: true })); // parses incoming URL-encoded payload req's for form submission
 app.use(express.static(path.resolve(__dirname, '../static'))); // serve static files
 
-// Session middleware setup
+// Session middleware setup, placement before route handling allows for session data availability
 app.use(session({
   secret: process.env.SESSION_SECRET,
   store: MongoStore.create({ mongoUrl: process.env.MONGODB_URI }),
   resave: false,
-  saveUnitialized: false, //better for login sessions + complies with permission laws
+  saveUninitialized: false, //better for login sessions + complies with permission laws
   cookie: {
     secure: process.env.NODE_ENV === 'production', // Secure cookies in production mode
     maxAge: 1000 * 60 * 60 * 24 // Cookie valid for 24 hours

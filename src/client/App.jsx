@@ -1,16 +1,14 @@
 import React, { useState, useEffect, Suspense, lazy } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import GameContext from './contexts/GameContext';
+import axios from 'axios';
+
 //Use dynamic imports using React.lazy for components associated with routes
 const Home = lazy(() => import('./components/Home'))
 const Play = lazy(() => import('./components/Play'))
 const GameOver = lazy(() => import('./components/GameOver'))
 const SignUp = lazy(() => import('./components/Signup'))
 const Login = lazy(() => import('./components/Login'))
-
-
-
-
 
 const App = () => {
   // Define State Variables from Context
@@ -19,7 +17,29 @@ const App = () => {
   const [maxGuessCount, setMaxGuessCount] = useState(10);
   const [minNum, setMinNum] = useState(0);
   const [maxNum, setMaxNum] = useState(7);
-  const [isSignedIn, setIsSignedIn] = useState(false);
+  const [isSignedIn, setIsSignedIn] = useState(false)
+
+  useEffect(() => {
+    // Function to check for active session upon App mount
+    const verifySession = async () => {
+      try {
+        // API get request to auth middleware
+        const response = await axios.get('/api/auth/verify-session');
+
+        // If session successfully verified, set signed in state to true
+        if (response.status === 200) {
+          setIsSignedIn(true); // backend returns a 200 status if the session is valid
+        } else {
+          setIsSignedIn(false);
+        }
+      } catch (error) {
+        console.error('Error verifying session:', error);
+        setIsSignedIn(false);
+      }
+    };
+    // Call function
+    verifySession();
+  }, [setIsSignedIn]); 
 
   // Store State Variables In Object To Pass Down In Provider
   const value = {

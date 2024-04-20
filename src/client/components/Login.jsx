@@ -32,7 +32,7 @@ const Login = () => {
     // POST request to database to check for account existence/correct password
     try {
       const response = await axios.post('/api/user/login', userAccountData);
-      alert('Successful login. Welcome back!')
+      alert(`${response.data.message}`)
       navigate('/');
       // set state to logged in
       setIsSignedIn(true);

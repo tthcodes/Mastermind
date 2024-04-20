@@ -42,7 +42,7 @@ const userController = {
       const user = await userModel.findOne( { username });
 
       // If user not found, send back err message to front-end to setError for client
-      if(!user) {
+      if (!user) {
         return res.status(404).json({ message: "Username not found." });
       }
 
@@ -52,11 +52,15 @@ const userController = {
         return res.status(400).json({ message: "Password is incorrect." });
       }
 
-      return res.status(200).json({ message: "Login successful. Welcome back!" })
+      // Set user ID in session, along with keeping username for client feedback
+      req.session.userId = user._id;
+      req.session.username = user.username; // Use to greet at homescreen and play page
+
+      return res.status(200).json({ message: `Login successful. Welcome back, ${username}!` })
 
     } catch (err) {
       console.error(`Error in userController.signIn: ${err}`);
-
+      // If MongoDB sends back unique key error, let client know username not unique
       if (err.code === 11000) {
         return res.status(409).json({ 
           message: 'Username already exists. Choose another one.'
@@ -73,6 +77,30 @@ const userController = {
       return next(errorInfo)
     };
   },
+  logout: async(req, res, next) => {
+    try {
+      // Destroy session
+      req.session.destroy(err => {
+        if(err) {
+          console.error(`Error in userController.logout: ${err}`);
+          return res.status(500).json({ message: 'Failed to end session' });
+        }
+        res.clearCookie('connect.sid'); // Clear cookie
+        return res.status(200).json({ message: 'Logout successful.'}) // Success message back to client
+      })
+    } catch (err) {
+      console.error(`Error in userController.logout: ${err}`);
+
+      // Structured error object
+      const errorInfo = {
+        log: 'Log Out Error',
+        status: 500,
+        message: 'Failed to log out.',
+        error: err.message
+      };
+      next(errorInfo)
+    };
+  }
 };
 
 export default userController;
