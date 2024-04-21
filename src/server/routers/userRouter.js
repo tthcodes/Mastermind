@@ -5,17 +5,26 @@ import authController from '../controllers/authController.js';
 
 const userRouter = express.Router();
 
-
+// user post requests (Sign up, Log in, Logout)
 userRouter.post('/sign-up', userController.signUp);
 userRouter.post('/login', userController.signIn, authController.verifySession);
 userRouter.post('/logout', userController.logout);
-userRouter.post('/change-password', 
+
+// user patch requests (Change password)
+userRouter.patch('/change-password', 
 authController.authenticateUser, 
 userController.getUser,
 userController.changePassword
 );
 
-// Route called on page load to verify user and personalize UI
+// user delete requests (Delete account)
+userRouter.delete('/delete-account', 
+authController.authenticateUser,
+userController.getUser,
+userController.deleteAccount
+);
+
+// user get request, called on page load to verify user account info and personalize UI
 userRouter.get('/get-user-data', 
   authController.authenticateUser, 
   userController.getUser, 

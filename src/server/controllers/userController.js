@@ -140,9 +140,10 @@ const userController = {
 
       // Keep log for demo purposes
       console.log('old:', oldPassword)
-      console.log('new:',newPassword)
+      console.log('new:', newPassword)
 
       // compare oldPassword client input to existing password in database
+      // for bcrypt.compare(), 1st param is STRING INPUT, 2nd param is existing HASHED database pw
       const correctPassword = await bcrypt.compare(oldPassword, password);
       if (!correctPassword){
         return res.status(400).json({ message: "Password is incorrect." });
@@ -151,7 +152,6 @@ const userController = {
       // If checks passed, hash new password, and update user account document
       const hashedPassword = await bcrypt.hash(newPassword, 12);
       await userModel.findByIdAndUpdate(_id, { password: hashedPassword }, { new: true })
-      console.log('ACCOUNT PW UPDATED FROM CONTROLLER')
 
       return res.status(200).json({ message: 'Password successfully changed!' });
 
@@ -162,6 +162,45 @@ const userController = {
         log: 'Change Password Error',
         status: 500,
         message: 'Failed to change password.',
+        error: err.message
+      };
+      next(errorInfo)
+    }
+  },
+
+  deleteAccount: async(req, res, next) => {
+    try {
+      // getUser will be invoked before this, so we will have user document in req object
+      // compare input old password to password from account in database
+      const { deletePassword } = req.body;
+      const { _id, password } = req.user;
+
+      // compare oldPassword client input to existing password in database
+      const correctPassword = await bcrypt.compare( deletePassword, password);
+      if (!correctPassword){
+        console.log('INCORRECT PASSWORD ERROR')
+        return res.status(400).json({ message: "Password is incorrect." });
+      }
+
+      // If checks passed, delete document
+      await userModel.findByIdAndDelete(_id);
+
+      // Destroy session
+      req.session.destroy(err => {
+        if (err) {
+          console.error(`Error in userController.deleteAccount: ${err}`);
+          return res.status(500).json({ message: 'Failed to end session' });
+        }
+        res.clearCookie('connect.sid'); // Clear cookie
+        res.status(200).json({ message: 'Account deleted.' }) // Success message back to client
+      });
+    } catch (err) {
+      console.error(`Error in userController.deleteAccount: ${err}`);
+      // Structured error object
+      const errorInfo = {
+        log: 'Delete Account Error',
+        status: 500,
+        message: 'Failed to delete account.',
         error: err.message
       };
       next(errorInfo)

@@ -43,7 +43,7 @@ const Profile = () => {
     }
 
     try {
-      const response = await axios.post('/api/user/change-password', {
+      const response = await axios.patch('/api/user/change-password', {
         oldPassword,
         newPassword
       });
@@ -64,23 +64,32 @@ const Profile = () => {
     }
 
     try {
-      const response = await axios.post('/api/user/delete-account', { password: deletePassword });
-      alert('Account deleted successfully');
+      // Have to specifically configure .delete requests to have an object.. in this case, to confirm password matches
+      const response = await axios.delete('/api/user/delete-account', {data: { deletePassword }});
+      alert(response.data.message);
       setIsSignedIn(false);
       navigate('/');
     } catch (err) {
-      console.error('Error during account deletion:', err);
+      console.error('Error during account deletion:', err.response.data.message);
       setError(err.response ? err.response.data.message : 'Failed to delete account.');
     }
   };
 
   return (
-    <Box sx={containerStyle}>
+    <Box sx={{ position: 'relative', ...containerStyle}}>
       <Typography variant="h4" sx={{ mt: 4, mb: 2 }}>
         {username}'s Profile
       </Typography>
       {error && (
-        <Typography color="error" sx={{ mt: 2 }}>
+        <Typography color="error" sx={{
+          position: 'absolute',
+          top: '51vh', // Adjust top as necessary to position the error message
+          right: 0, // Adjust right to align the message as you prefer
+          width: '100%', // Ensure it spans the full container width if necessary
+          textAlign: 'center', // Center the text
+          background: 'rgba(255, 255, 255, 0.8)', // Optional: add a semi-transparent background
+          zIndex: 2 // Ensure it sits above other elements
+        }}>
           {error}
         </Typography>
       )}
@@ -120,6 +129,20 @@ const Profile = () => {
           Delete Account
         </Button>
       </form>
+      <Box sx={{
+        display: 'flex',
+        justifyContent: 'space-between',
+        width: '94%',
+        marginTop: '3%',
+        mb: 3
+      }}>
+        <Button variant="outlined" sx={{ alignSelf: 'flex-start', fontWeight: 'bold' }} onClick={() => navigate('/')}>
+          Back
+        </Button>
+        <Button variant="outlined" sx={{ alignSelf: 'flex-end', fontWeight: 'bold' }} onClick={() => navigate('/settings')}>
+          Settings
+        </Button>
+      </Box>
     </Box>
   );
 };

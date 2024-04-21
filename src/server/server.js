@@ -8,6 +8,7 @@ import connectToDB from './database.js';
 import apiRouter from './routers/apiRouter.js';
 import session from 'express-session';
 import MongoStore from 'connect-mongo';
+import cors from 'cors'; // Should i put this in routers for more granular approach?
 
 // Check environment mode
 const MODE = process.env.NODE_ENV || 'development'
@@ -27,6 +28,11 @@ const app = express();
 // General Middleware for all environments
 app.use(express.json()); // parses incoming JSON data into Javascript code
 app.use(express.urlencoded({ extended: true })); // parses incoming URL-encoded payload req's for form submission
+app.use(cors({
+  origin: '*', // Configure in PRODUCTION environments. Fine for development..
+  methods: ['GET', 'POST', 'PATCH', 'DELETE'], // Allowed methods
+  credentials: true // Allow cookies to be sent with requests
+}));
 
 // Session middleware setup, placement before route handling allows for session data availability
 app.use(session({

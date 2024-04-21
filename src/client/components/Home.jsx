@@ -53,7 +53,7 @@ const Home = () => {
         marginTop: 2,
         testAlign: 'center',
       }}>
-        Welcome back, {userData.username}! Current score: <span style={{ color: 'blue' }}>{userData.score}</span>.
+        Welcome back, {userData.username}! Current score: <span style={{ color: 'blue' }}>{userData.score}</span>
       </Typography>) : null}
       <Typography variant="h2" component="h1" sx={{ color: 'black', fontWeight: 'bold', textAlign: 'center', marginTop: 20, fontFamily: 'bungee'}}>
         Mastermind
