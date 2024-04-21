@@ -27,21 +27,15 @@ const GameOver = () => {
       backgroundColor: backgroundColor,
       color: color,
     }}>
-      { winner ? (
         <Typography variant = 'h6' sx={{ fontSize: '1.5rem', mb: 3}}>
           {message}
         </Typography>
-      ) : (
-        <Typography variant = 'h6' sx={{ fontSize: '1.5rem', mb: 3}}>
-          {message}
-        </Typography>
-      )}
         <Box sx={{
-        display: 'flex',
-        justifyContent: 'space-between',
-        width: '30%',
-        marginTop: '3%',
-        mb: 3,
+          display: 'flex',
+          justifyContent: 'space-between',
+          width: '30%',
+          marginTop: '3%',
+          mb: 3,
         }}>
           <Button size="sm" variant="outlined" onClick={() => navigate('/play')} sx={{
             borderColor: color,

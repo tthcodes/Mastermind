@@ -12,7 +12,7 @@ const Play = () => {
   const navigate = useNavigate();
   const [guessCount, setGuessCount] = useState(0);
   const [guessLog, setGuessLog] = useState([]);
-  const { answer, setAnswer, numCount, maxGuessCount, minNum, maxNum } = useContext(GameContext);
+  const { answer, setAnswer, numCount, maxGuessCount, minNum, maxNum, isSignedIn } = useContext(GameContext);
 
   // useEffect that will generate new correct answer on page load or change in min, max, answer length
   useEffect(() => {
@@ -92,7 +92,19 @@ const Play = () => {
       return [numbersCorrect, locationsCorrect];
     };
 
-  // Create a function that check the user's submitted guess vs. answer and updates guessLog 
+  // Create helper func that increments user score on wins (if signed in)
+    const updateUserScore = async () => {
+      try {
+        const response = await axios.patch('/api/user/update-score');
+        console.log('Score updated', response.data.message);
+
+      } catch (err) {
+        console.error('Error updating score:', err);
+        alert('Failed to update score.');
+      }
+    };
+
+  // Create a function that checks for win condition, updates guess count, and guess log 
     const checkAnswer = async (guess) => {
       
       // Convert guess str to nums arr to compare answer arr
@@ -105,8 +117,9 @@ const Play = () => {
         return;
       };
 
-      // Check if the guess is correct
+      // Check if the guess is correct, if it is, update userScore with helper func
       if (guessArr.join('') === answer.join('')) {
+        if (isSignedIn) await updateUserScore(); // Updates score if user logged in
         navigate('/gameover', {
           state: {
             winner: true,
@@ -116,7 +129,7 @@ const Play = () => {
         return;
       }
 
-      // Update guess count, check if new guess count ends game.
+      // Update guess count, check if new guess count ends game with helper func
       setGuessCount(prevCount => {
         const newGuessCount = prevCount + 1;
         isGameOver(newGuessCount); // Check if game should end based on guessCount
