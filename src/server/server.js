@@ -19,7 +19,7 @@ if (!process.env.MONGODB_URI) {
   process.exit(1);
 };
 
-// Allows for use of filename and dirname such as in CommonJS
+// Allows for use of filename and dirname such as in CommonJS, adapted for ES Module Syntax
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -51,8 +51,10 @@ app.use(session({
 // Route handling for all API requests
 app.use('/api', apiRouter)
 
-// Connect to database
-connectToDB();
+// Connect to database if not in testing mode
+if(MODE !== 'test'){
+  connectToDB();
+}
 
 // If in production mode, handle serving static files
 if (MODE === 'production'){
@@ -85,6 +87,13 @@ app.use((err, req, res, _next) => {
 
 const PORT = process.env.PORT || 3000;
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`)
-});
+// Check if module is entry point
+const isMain = process.argv[1] === fileURLToPath(import.meta.url);
+
+if(isMain) {
+  app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`)
+  });
+}
+
+export default app;
