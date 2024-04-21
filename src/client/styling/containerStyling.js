@@ -1,5 +1,5 @@
 // MUI Styling for Outer Box Containing App
-const boxStyle = {
+const containerStyle = {
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
@@ -11,4 +11,4 @@ const boxStyle = {
   border: '2px solid black'
 };
 
-export default boxStyle;
+export default containerStyle;

@@ -1,14 +1,36 @@
 import { Box, Typography } from '@mui/material'
 import { Button } from '@mui/joy'
 import { useNavigate } from 'react-router-dom'
-import React, { useContext } from 'react'
-import boxStyle from '../styling/BoxStyle'
+import React, { useState, useEffect, useContext } from 'react'
+import containerStyle from '../styling/containerStyling'
 import GameContext from '../contexts/GameContext'
 import axios from 'axios'
 
 const Home = () => {
   const {isSignedIn, setIsSignedIn} = useContext(GameContext)
   const navigate = useNavigate();
+  const [ userData, setUserData ] = useState({ username: 'default', score: -1 });
+
+  // Upon home component load, fetch user's data to display in U
+  useEffect(() => {
+    const fetchUserData = async () => {
+      if (isSignedIn) {
+        try {
+          const response = await axios.get('/api/user/get-user-data');
+          if (response.status === 200) {
+            setUserData({
+              username: response.data.username,
+              score: response.data.userScore
+            });
+          }
+        } catch (error) {
+          console.error('Error fetching user data:', error);
+        }
+      }
+    };
+
+    fetchUserData();
+  }, [isSignedIn]); 
 
   const handleLogout = async() => {
     try {
@@ -24,7 +46,15 @@ const Home = () => {
   }
 
   return (
-    <Box sx={boxStyle}>
+    <Box sx={containerStyle}>
+      {isSignedIn ? (
+      <Typography sx = {{
+        fontWeight: 'bold',
+        marginTop: 2,
+        testAlign: 'center',
+      }}>
+        Welcome back, {userData.username}! Current score: <span style={{ color: 'blue' }}>{userData.score}</span>.
+      </Typography>) : null}
       <Typography variant="h2" component="h1" sx={{ color: 'black', fontWeight: 'bold', textAlign: 'center', marginTop: 20, fontFamily: 'bungee'}}>
         Mastermind
       </Typography>

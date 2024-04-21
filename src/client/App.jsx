@@ -9,6 +9,8 @@ const Play = lazy(() => import('./components/Play'))
 const GameOver = lazy(() => import('./components/GameOver'))
 const SignUp = lazy(() => import('./components/Signup'))
 const Login = lazy(() => import('./components/Login'))
+const Profile = lazy(() => import('./components/Profile'))
+
 
 const App = () => {
   // Define State Variables from Context
@@ -68,6 +70,7 @@ const App = () => {
           <Route path='/login' element={<Login />} />
           <Route path='/signup' element={<SignUp />} />
           <Route path='/gameover' element={<GameOver />} />
+          <Route path='/profile' element={<Profile />} />
         </Routes>
       </Suspense>
     </GameContext.Provider>

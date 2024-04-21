@@ -35,7 +35,9 @@ app.use(session({
   resave: false,
   saveUninitialized: false, //better for login sessions + complies with permission laws
   cookie: {
-    secure: process.env.NODE_ENV === 'production', // Secure cookies in production mode
+    // Secure cookies in production mode, cookies sent over HTTPS connections only
+    secure: process.env.NODE_ENV === 'production',
+    httpOnly: true, // Protects against cross-site scripting, cookies inaccessible to JS
     maxAge: 1000 * 60 * 60 * 24 // Cookie valid for 24 hours
   }
 }));
@@ -43,18 +45,18 @@ app.use(session({
 // Route handling for all API requests
 app.use('/api', apiRouter)
 
+// Connect to database
+connectToDB();
+
 // If in production mode, handle serving static files
 if (MODE === 'production'){
-  connectToDB()
   app.use(express.static(path.resolve(__dirname, '../../dist'))); // serve static files
   app.get('*', (req, res) => {
     return res.sendFile(path.resolve(__dirname, '../../dist/index.html'));
   });
   console.log('MODE IS IN PRODUCTION')
-  console.log(path.resolve(__dirname, '../dist'))
 } else if (MODE === 'development'){
   console.log('MODE IS IN DEVELOPMENT')
-  connectToDB()
 }
 
 // Error if no routing occurs

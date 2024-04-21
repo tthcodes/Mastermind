@@ -2,7 +2,7 @@ import { Box, Typography, TextField, MenuItem, FormControl, InputLabel, Select }
 import { Button } from '@mui/joy'
 import { useNavigate } from 'react-router-dom'
 import React, { useState } from 'react'
-import boxStyle from '../styling/BoxStyle'
+import containerStyle from '../styling/containerStyling'
 import axios from 'axios'
 
 const SignUp = () => {
@@ -70,7 +70,7 @@ const SignUp = () => {
 
   return (
     <Box sx={{
-      ...boxStyle,
+      ...containerStyle,
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
