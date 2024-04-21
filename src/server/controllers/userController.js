@@ -43,13 +43,15 @@ const userController = {
 
       // If user not found, send back err message to front-end to setError for client
       if (!user) {
-        return res.status(404).json({ message: "Username not found." });
+        return res.status(404).json({ message: "User not found or password incorrect." });
       }
 
       // If user found, compare passwords using bcrypt
       const correctPassword = await bcrypt.compare(password, user.password);
       if (!correctPassword){
-        return res.status(400).json({ message: "Password is incorrect." });
+        // At first, thought about specifying if user was found, but incorrect password.. 
+          // But likely safer for users if we do not specify when username is found.
+        return res.status(400).json({ message: "User not found or password incorrect." });
       }
 
       // Set user ID in session, along with keeping username for client feedback
