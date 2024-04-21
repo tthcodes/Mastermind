@@ -10,6 +10,7 @@ const GameOver = lazy(() => import('./components/GameOver'))
 const SignUp = lazy(() => import('./components/Signup'))
 const Login = lazy(() => import('./components/Login'))
 const Profile = lazy(() => import('./components/Profile'))
+const Instructions = lazy(() => import('./components/Instructions'))
 
 
 const App = () => {
@@ -65,7 +66,7 @@ const App = () => {
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/play' element={<Play />} />
-          <Route path='/instructions' element={<Home />} />
+          <Route path='/instructions' element={<Instructions />} />
           <Route path='/settings' element={<Home />} />
           <Route path='/login' element={<Login />} />
           <Route path='/signup' element={<SignUp />} />

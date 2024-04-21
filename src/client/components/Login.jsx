@@ -11,7 +11,7 @@ const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const { isSignedIn, setIsSignedIn } = useContext(GameContext)
+  const { setIsSignedIn } = useContext(GameContext)
 
   // Function to handle submission of account info for login
   const handleLogin = async (event) => {

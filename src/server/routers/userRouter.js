@@ -10,12 +10,19 @@ userRouter.post('/sign-up', userController.signUp);
 userRouter.post('/login', userController.signIn, authController.verifySession);
 userRouter.post('/logout', userController.logout);
 
-// user patch requests (Change password)
+// user patch requests (Change password, Update win totals)
 userRouter.patch('/change-password', 
 authController.authenticateUser, 
 userController.getUser,
 userController.changePassword
 );
+
+userRouter.patch('/update-score', 
+authController.authenticateUser, 
+userController.getUser,
+userController.updateScore
+);
+
 
 // user delete requests (Delete account)
 userRouter.delete('/delete-account', 

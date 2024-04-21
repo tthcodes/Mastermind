@@ -178,7 +178,6 @@ const userController = {
       // compare oldPassword client input to existing password in database
       const correctPassword = await bcrypt.compare( deletePassword, password);
       if (!correctPassword){
-        console.log('INCORRECT PASSWORD ERROR')
         return res.status(400).json({ message: "Password is incorrect." });
       }
 
@@ -201,6 +200,35 @@ const userController = {
         log: 'Delete Account Error',
         status: 500,
         message: 'Failed to delete account.',
+        error: err.message
+      };
+      next(errorInfo)
+    }
+  },
+
+  // Update database userScore for every win
+  updateScore: async(req, res, next) => {
+    try {
+      const { _id } = req.user;
+      const updatedUser = await userModel.findByIdAndUpdate(
+        _id, 
+        { $inc: {userScore: 1} }, // Increment operator from MongoDB (atomic update)
+        { new: true } // Returns updated doc within updatedUser const
+        );
+
+      if (!updatedUser) {
+        return res.status(404).json({ message: 'User not found' });
+      }
+
+      // Return updated score to client from updatedUser Doc
+      res.status(200).json({ message: `Congratulations, scored updated! New score: ${updatedUser.userScore}!` })
+    } catch (err) {
+      console.error(`Error in userController.updateScore: ${err}`);
+      // Structured error object
+      const errorInfo = {
+        log: 'Update Score Error',
+        status: 500,
+        message: 'Failed to update score.',
         error: err.message
       };
       next(errorInfo)

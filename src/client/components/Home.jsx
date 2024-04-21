@@ -50,10 +50,10 @@ const Home = () => {
       {isSignedIn ? (
       <Typography sx = {{
         fontWeight: 'bold',
-        marginTop: 2,
+        marginTop: 4,
         testAlign: 'center',
       }}>
-        Welcome back, {userData.username}! Current score: <span style={{ color: 'blue' }}>{userData.score}</span>
+        Welcome back, {userData.username}! Total Wins: <span style={{ color: 'blue' }}>{userData.score}</span>
       </Typography>) : null}
       <Typography variant="h2" component="h1" sx={{ color: 'black', fontWeight: 'bold', textAlign: 'center', marginTop: 20, fontFamily: 'bungee'}}>
         Mastermind

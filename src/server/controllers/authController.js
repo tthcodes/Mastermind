@@ -10,7 +10,6 @@ const authController = {
   // Route protector to secure sensitive application endpoints
   authenticateUser: (req, res, next) => {
     if (req.session.userId) {
-      console.log('User authorized!');
       return next();
     } else {
       res.status(401).json({ message: 'Unauthorized action, please log in.' })
