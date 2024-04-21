@@ -2,10 +2,8 @@ export default {
   globalSetup: './jest-mongodb-setup.js',
   globalTeardown: './jest-mongodb-teardown.js',
   testEnvironment: 'node',
-  transform: {
-    '^.+\\.js$': 'babel-jest',
-    '^.+\\.jsx$': 'babel-jest'
-  },
+  extensionsToTreatAsEsm: ['.jsx'],
+  transform: {},
   testMatch: ['**/__tests__/**/*.[jt]s?(x)', '**/?(*.)+(spec|test).[tj]s?(x)'],
   modulePaths: ['<rootDir>/src/'],
   moduleNameMapper: {
