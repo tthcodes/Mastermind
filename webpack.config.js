@@ -49,7 +49,7 @@ export default {
     open: true,
     hot: true,
     compress: true,
-    historyApiFallback: false,
+    historyApiFallback: true,
     proxy: [{
       context: ['/api/**'],
       target: 'http://localhost:3000',

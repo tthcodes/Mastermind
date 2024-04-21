@@ -8,6 +8,7 @@ import connectToDB from './database.js';
 import apiRouter from './routers/apiRouter.js';
 import session from 'express-session';
 import MongoStore from 'connect-mongo';
+import cors from 'cors'; // Should i put this in routers for more granular approach?
 
 // Check environment mode
 const MODE = process.env.NODE_ENV || 'development'
@@ -27,6 +28,11 @@ const app = express();
 // General Middleware for all environments
 app.use(express.json()); // parses incoming JSON data into Javascript code
 app.use(express.urlencoded({ extended: true })); // parses incoming URL-encoded payload req's for form submission
+app.use(cors({
+  origin: '*', // Configure in PRODUCTION environments. Fine for development..
+  methods: ['GET', 'POST', 'PATCH', 'DELETE'], // Allowed methods
+  credentials: true // Allow cookies to be sent with requests
+}));
 
 // Session middleware setup, placement before route handling allows for session data availability
 app.use(session({
@@ -35,7 +41,9 @@ app.use(session({
   resave: false,
   saveUninitialized: false, //better for login sessions + complies with permission laws
   cookie: {
-    secure: process.env.NODE_ENV === 'production', // Secure cookies in production mode
+    // Secure cookies in production mode, cookies sent over HTTPS connections only
+    secure: process.env.NODE_ENV === 'production',
+    httpOnly: true, // Protects against cross-site scripting, cookies inaccessible to JS
     maxAge: 1000 * 60 * 60 * 24 // Cookie valid for 24 hours
   }
 }));
@@ -43,18 +51,18 @@ app.use(session({
 // Route handling for all API requests
 app.use('/api', apiRouter)
 
+// Connect to database
+connectToDB();
+
 // If in production mode, handle serving static files
 if (MODE === 'production'){
-  connectToDB()
   app.use(express.static(path.resolve(__dirname, '../../dist'))); // serve static files
   app.get('*', (req, res) => {
     return res.sendFile(path.resolve(__dirname, '../../dist/index.html'));
   });
   console.log('MODE IS IN PRODUCTION')
-  console.log(path.resolve(__dirname, '../dist'))
 } else if (MODE === 'development'){
   console.log('MODE IS IN DEVELOPMENT')
-  connectToDB()
 }
 
 // Error if no routing occurs

@@ -2,7 +2,7 @@
 import React from 'react';
 import { Box, Typography } from '@mui/material'
 import { Button } from '@mui/joy'
-import boxStyle from '../styling/BoxStyle';
+import containerStyle from '../styling/containerStyling';
 import { useLocation, useNavigate } from 'react-router-dom'
 
 const GameOver = () => {
@@ -18,7 +18,7 @@ const GameOver = () => {
 
   return (
     <Box sx = {{
-      ...boxStyle,
+      ...containerStyle,
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',

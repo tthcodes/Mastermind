@@ -39,7 +39,7 @@ const userController = {
       const { username, password } = req.body;
 
       // Read database to see if username exists
-      const user = await userModel.findOne( { username });
+      const user = await userModel.findOne({ username });
 
       // If user not found, send back err message to front-end to setError for client
       if (!user) {
@@ -77,6 +77,7 @@ const userController = {
       return next(errorInfo)
     };
   },
+
   logout: async(req, res, next) => {
     try {
       // Destroy session
@@ -100,6 +101,110 @@ const userController = {
       };
       next(errorInfo)
     };
+  },
+
+  getUser: async(req, res, next) => {
+    try {
+      // Fetch user data by leveraging user ID stored in session store
+      const user = await userModel.findById(req.session.userId);
+
+      // Return error if user not found using req.session
+      if (!user) {
+        return res.status(404).send({ message: 'User not found' })
+      }
+
+      // Attach user data from database to req object. req.user should have all account info now.
+      req.user = user;
+      next();
+
+    } catch (err) {
+      console.error(`Error in userController.logout: ${err}`);
+
+      // Structured error object
+      const errorInfo = {
+        log: 'Get User Error',
+        status: 500,
+        message: 'Failed to fetch user data.',
+        error: err.message
+      };
+      next(errorInfo)
+    };
+  },
+  
+  changePassword: async(req, res,) => {
+    try {
+      // getUser will be invoked before this, so we will have user document in req object
+      // oldpassword, and new password from req.body, and user obj from req.user
+      const { oldPassword, newPassword } = req.body;
+      const { _id, password } = req.user;
+
+      // Keep log for demo purposes
+      console.log('old:', oldPassword)
+      console.log('new:', newPassword)
+
+      // compare oldPassword client input to existing password in database
+      // for bcrypt.compare(), 1st param is STRING INPUT, 2nd param is existing HASHED database pw
+      const correctPassword = await bcrypt.compare(oldPassword, password);
+      if (!correctPassword){
+        return res.status(400).json({ message: "Password is incorrect." });
+      }
+
+      // If checks passed, hash new password, and update user account document
+      const hashedPassword = await bcrypt.hash(newPassword, 12);
+      await userModel.findByIdAndUpdate(_id, { password: hashedPassword }, { new: true })
+
+      return res.status(200).json({ message: 'Password successfully changed!' });
+
+    } catch (err) {
+      console.error(`Error in userController.changePassword: ${err}`);
+      // Structured error object
+      const errorInfo = {
+        log: 'Change Password Error',
+        status: 500,
+        message: 'Failed to change password.',
+        error: err.message
+      };
+      next(errorInfo)
+    }
+  },
+
+  deleteAccount: async(req, res, next) => {
+    try {
+      // getUser will be invoked before this, so we will have user document in req object
+      // compare input old password to password from account in database
+      const { deletePassword } = req.body;
+      const { _id, password } = req.user;
+
+      // compare oldPassword client input to existing password in database
+      const correctPassword = await bcrypt.compare( deletePassword, password);
+      if (!correctPassword){
+        console.log('INCORRECT PASSWORD ERROR')
+        return res.status(400).json({ message: "Password is incorrect." });
+      }
+
+      // If checks passed, delete document
+      await userModel.findByIdAndDelete(_id);
+
+      // Destroy session
+      req.session.destroy(err => {
+        if (err) {
+          console.error(`Error in userController.deleteAccount: ${err}`);
+          return res.status(500).json({ message: 'Failed to end session' });
+        }
+        res.clearCookie('connect.sid'); // Clear cookie
+        res.status(200).json({ message: 'Account deleted.' }) // Success message back to client
+      });
+    } catch (err) {
+      console.error(`Error in userController.deleteAccount: ${err}`);
+      // Structured error object
+      const errorInfo = {
+        log: 'Delete Account Error',
+        status: 500,
+        message: 'Failed to delete account.',
+        error: err.message
+      };
+      next(errorInfo)
+    }
   }
 };
 

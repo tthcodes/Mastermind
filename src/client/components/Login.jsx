@@ -2,7 +2,7 @@ import { Box, Typography, TextField } from '@mui/material'
 import { Button } from '@mui/joy'
 import { useNavigate } from 'react-router-dom'
 import React, { useState, useContext } from 'react'
-import boxStyle from '../styling/BoxStyle'
+import containerStyle from '../styling/containerStyling'
 import axios from 'axios'
 import GameContext from '../contexts/GameContext'
 
@@ -52,7 +52,7 @@ const Login = () => {
 
   return (
     <Box sx={{
-      ...boxStyle,
+      ...containerStyle,
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',

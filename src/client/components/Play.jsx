@@ -2,7 +2,7 @@ import { Box, Typography } from '@mui/material';
 import { Button } from '@mui/joy';
 import { useNavigate } from 'react-router-dom';
 import React, { useState, useEffect, useContext } from 'react';
-import boxStyle from '../styling/BoxStyle';
+import containerStyle from '../styling/containerStyling';
 import axios from 'axios';
 import GameContext from '../contexts/GameContext';
 import GuessLog from './GuessLog';
@@ -22,7 +22,6 @@ const Play = () => {
         const response = await axios.get(`/api/generate-answer/?length=${numCount}&min=${minNum}&max=${maxNum}`);
         
         // Defensive check for if we do not get back the generated answer in num array form
-        console.log('DATA RESPONSE WHEN GETTING ANSWER:', response.data)
         if (Array.isArray(response.data) && response.data.length > 0) {
 
           setAnswer(response.data); // Update answer state
@@ -141,7 +140,7 @@ const Play = () => {
     };
 
   return (
-    <Box sx={boxStyle}>
+    <Box sx={containerStyle}>
       <Typography variant="h2" component="h1" sx={{ 
         color: 'black',
         fontWeight: 'bold',

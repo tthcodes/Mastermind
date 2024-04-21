@@ -5,14 +5,32 @@ import authController from '../controllers/authController.js';
 
 const userRouter = express.Router();
 
-// Check if user is logged in on home page. 
-// Show user score if they are logged in (Home, Play, GameOver)
-// Display user name on HomePage, and GameOver if logged in
-// Calculate total earned points w/ every win that also updates user score. 
-
+// user post requests (Sign up, Log in, Logout)
 userRouter.post('/sign-up', userController.signUp);
 userRouter.post('/login', userController.signIn, authController.verifySession);
 userRouter.post('/logout', userController.logout);
+
+// user patch requests (Change password)
+userRouter.patch('/change-password', 
+authController.authenticateUser, 
+userController.getUser,
+userController.changePassword
+);
+
+// user delete requests (Delete account)
+userRouter.delete('/delete-account', 
+authController.authenticateUser,
+userController.getUser,
+userController.deleteAccount
+);
+
+// user get request, called on page load to verify user account info and personalize UI
+userRouter.get('/get-user-data', 
+  authController.authenticateUser, 
+  userController.getUser, 
+  (req, res) => {
+  res.status(200).json(req.user);
+})
 
 
 export default userRouter;
