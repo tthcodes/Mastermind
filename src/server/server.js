@@ -9,6 +9,7 @@ import apiRouter from './routers/apiRouter.js';
 import session from 'express-session';
 import MongoStore from 'connect-mongo';
 import cors from 'cors'; // Should i put this in routers for more granular approach?
+import rateLimit from 'express-rate-limit'
 
 // Environment variable validation
 if (!process.env.MONGODB_URI) {
@@ -25,6 +26,15 @@ const __dirname = path.dirname(__filename);
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+// Define rate limiting parameters
+const apiLimiter = rateLimit({
+  windowMs: 2 * 60 * 1000, // defined window for requests
+  max: 20, // max num of requests from each IP per window
+  message: 'Request limit reached, please try again after 5 minutes',
+  standardHeaders: true,
+  legacyHeaders: false
+});
 
 // General Middleware for all environments
 app.use(express.json()); // parses incoming JSON data into Javascript code
@@ -49,13 +59,13 @@ app.use(session({
   }
 }));
 
-// Route handling for all API requests
-app.use('/api', apiRouter)
-
 // Make root route always available 
-app.use('/', (req, res) => {
+app.get('/', (req, res) => {
   res.send('Home Page');
 });
+
+// Apply rate limiter to requests before routing to api router hub
+app.use('/api', apiLimiter, apiRouter)
 
 // Connect to database if not in testing mode
 if(MODE !== 'test'){
