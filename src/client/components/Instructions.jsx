@@ -23,7 +23,7 @@ const Instructions = () => {
           <ListItemText primary="1. Start the game by clicking the 'Start' button." />
         </ListItem>
         <ListItem>
-          <ListItemText primary="2. Guess the correct sequence of numbers, which is randomly generated every game. There CAN be duplicates." />
+          <ListItemText primary="2. Guess the correct sequence of numbers, which is randomly generated every game. Numbers will range from 0 -> 7. There CAN be duplicates." />
         </ListItem>
         <ListItem>
           <ListItemText primary="3. You have a limited number of attempts to guess correctly." />

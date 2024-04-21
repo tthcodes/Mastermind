@@ -12,3 +12,10 @@ generateKey.mjs
 
 # Ignore directory where build artifacts made
 dist/
+build/
+
+# Any coverage directories made by Jest
+coverage/
+
+# Jest cache
+.cache/
