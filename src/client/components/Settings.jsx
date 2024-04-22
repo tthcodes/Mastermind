@@ -58,8 +58,14 @@ const Settings = () => {
       flexDirection: 'column',
       alignItems: 'center',
       justifyContent: 'center',
+      height: '100vh'
       }}>
-      <Box sx={{ padding: 4, maxWidth: 500, margin: '0 auto', display: 'flex', flexDirection: 'column', gap: 2 }}>
+      <Box sx={{ 
+        padding: 4, 
+        maxWidth: 500, 
+        margin: '0 auto',
+        display: 'flex', 
+        flexDirection: 'column', gap: 2 }}>
 
         <Typography variant="h4" gutterBottom sx={{ 
           textDecoration: 'underline',
@@ -107,10 +113,12 @@ const Settings = () => {
           </Typography>
         )}
       <Box sx={{
-        position: 'absolute', // Absolute positioning within the relatively positioned Box
-        left: 285, // Move it to the left side with some margin
-        bottom: 20, // Place it at the bottom with some margin
-        width: 'auto', // Auto width according to content
+        position: 'absolute',  // Absolute positioning can be used or adjust with margin-top for relative
+        bottom: 16,  // Adjusts the bottom position
+        left: '34%',  // Centers horizontally
+        transform: 'translateX(-50%)',  // Aligns center perfectly
+        width: 'auto',  // Adjusts width to fit content
+        mt: 4  // Adds margin-top to push down relative to content above if not using absolute
       }}>
         <Button variant="outlined" onClick={() => navigate(-1)} >
           Back
