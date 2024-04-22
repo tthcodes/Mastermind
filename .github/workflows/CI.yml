@@ -9,29 +9,29 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    
+    services:
+      mongodb:
+        image: mongo:latest
+        ports:
+          - 27017:27017
+        options: --health-cmd "mongo --eval 'db.runCommand({ping: 1})' --quiet" --health-interval 10s --health-timeout 5s --health-retries 5
 
     steps:
     - uses: actions/checkout@v2
+
     - name: Use Node.js
       uses: actions/setup-node@v2
       with:
         node-version: '18.16.0'
 
+    - name: Set Environment Variables
+      run: echo "MONGODB_URI=mongodb://localhost:27017/testdb" >> $GITHUB_ENV
+
     - name: Install dependencies
       run: npm install
 
-    - name: Run Tests
+    - name: Run tests
       run: npm test
-      env: 
+      env:
         NODE_ENV: test
-
-    - name: Build
-      run: npm run build
-
-    - name: Deploy to Heroku
-      if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-      uses: akhileshns/heroku-deploy@v3.12.12
-      with:
-        heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
-        heroku_app_name: "your-heroku-app-name"
-        heroku_email: "your-email@example.com"
