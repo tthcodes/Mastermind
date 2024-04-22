@@ -68,21 +68,23 @@ You can run tests to inspect code reliability by running the following in your t
 
 ## Demo and Screenshots 📸
 
-**Main Menu**
+**Main Menu**: Home page on application load.
 
   <img width="642" alt="Screenshot 2024-04-22 at 2 08 13 PM" src="https://github.com/tthcodes/Mastermind/assets/115741651/ad8a6011-b2e8-4b9a-b431-331a61edacdb">
 
-**Sign Up Page**
+**Instructions Page**: How to play page that describes gameplay mechanics and rules.
 
-**Sign In Page**
+**Sign Up Page**: Sign up page that allows players to register an account.
 
-**Login Page**
+<img width="649" alt="Screenshot 2024-04-22 at 2 09 25 PM" src="https://github.com/tthcodes/Mastermind/assets/115741651/dd45e186-5613-4a96-888c-f6f06473a03a">
 
-**Account Page**
+**Login Page**: Login page allowing returning players to log in.
 
-**Game Play Demo**
+**Account Page**: Profile page that allows players to change password or delete account.
 
-**Game Over Demo**
+**Game Play Demo**: 
+
+**Game Over Demo**:
 
 ## Features, MVP, and Stretch Features 🏁
 
