@@ -1,6 +1,5 @@
 export default {
-  globalSetup: './jest-mongodb-setup.js',
-  globalTeardown: './jest-mongodb-teardown.js',
+  setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
   testEnvironment: 'node',
   extensionsToTreatAsEsm: ['.jsx'],
   transform: {},

@@ -7,10 +7,10 @@ const userRouter = express.Router();
 
 // user post requests (Sign up, Log in, Logout)
 userRouter.post('/sign-up', userController.signUp);
-userRouter.post('/login', userController.signIn, authController.verifySession);
+userRouter.post('/login', userController.signIn);
 userRouter.post('/logout', userController.logout);
 
-// user patch requests (Change password, Update win totals)
+// user patch requests (Change password, Update win totals), protect
 userRouter.patch('/change-password', 
 authController.authenticateUser, 
 userController.getUser,
@@ -23,15 +23,14 @@ userController.getUser,
 userController.updateScore
 );
 
-
-// user delete requests (Delete account)
+// user delete requests (Delete account), protect
 userRouter.delete('/delete-account', 
 authController.authenticateUser,
 userController.getUser,
 userController.deleteAccount
 );
 
-// user get request, called on page load to verify user account info and personalize UI
+// user get request, called on page load to verify user account info and personalize UI, protect
 userRouter.get('/get-user-data', 
   authController.authenticateUser, 
   userController.getUser, 
