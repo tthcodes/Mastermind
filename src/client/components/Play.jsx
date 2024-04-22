@@ -140,6 +140,7 @@ const Play = () => {
       const [guessCorrectNums, guessCorrectLocations] = getGuessAccuracy(guess, answer);
       
       // Update guessLog
+        // Console logs to browser for developer clarity... not good for production lol
       console.log('correct answer:', answer, 'current guess:', guessArr)
       console.log('current correct nums:', guessCorrectNums, 'current correct locs:', guessCorrectLocations)
       setGuessLog(prevState => [...prevState, [guessArr, guessCorrectNums, guessCorrectLocations]]);
@@ -201,4 +202,3 @@ const Play = () => {
 };
 
 export default Play
-export { getGuessAccuracy }
