@@ -19,11 +19,11 @@ Before installing, ensure you have the following prerequisites installed:
 - npm (9.5.1 or later)
 - MongoDB (local or remote instance)
 
-If you require assistance in installing, refer to these links:
+If you require assistance in installing system requirements, refer to these links:
 - Node: [https://nodejs.org/en]
 - npm: [https://docs.npmjs.com/about-npm]
 
-### Steps for installation:
+### Steps for game installation:
 1. Clone the repository:
 ```bash
   $ git clone https://github.com/tthcodes/Mastermind
