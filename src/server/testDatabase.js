@@ -7,6 +7,7 @@ const connectToTestDB = async() => {
   const uri = mongoServer.getUri();
 
   process.env.MONGODB_URI = uri; // Change env variable for testing
+  console.log('SUCCESFULLY CHANGED MONGODB_URI', process.env.MONGODB_URI)
 
   try {
     // console.log('Connecting to Test DB...');

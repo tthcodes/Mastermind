@@ -20,8 +20,10 @@ jobs:
     - name: Install dependencies
       run: npm install
 
-    - name: Run tests
+    - name: Run Tests
       run: npm test
+      env: 
+        NODE_ENV: test
 
     - name: Build
       run: npm run build
