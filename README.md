@@ -88,11 +88,26 @@ You can run tests to inspect code reliability by running the following in your t
 
 <img width="624" alt="Screenshot 2024-04-22 at 5 22 10 PM" src="https://github.com/tthcodes/Mastermind/assets/115741651/5172f06e-ea0f-4953-b98f-53ed629256e9">
 
-**Game Play Demo**: 
+**Game Play Demo**: Gameplay showing basic mechanics of the game.
 
-**Game Over Demo**:
+![gameplay](https://github.com/tthcodes/Mastermind/assets/115741651/5166e784-b0c7-4fae-9277-a312c89ca798)
 
-**Settings Demo**:
+**Game Over Demo**: Game over screen dynamically changes depending on if the player wins or loses.
+
+<table>
+  <tr>
+    <td><strong>Example of the player losing:</strong><br>
+      <img src="https://github.com/tthcodes/Mastermind/assets/115741651/b54304b1-5cc7-4665-b57b-e38ccddc43d7" alt="Losing Screen">
+    </td>
+    <td><strong>Example of the player winning:</strong><br>
+      <img src="https://github.com/tthcodes/Mastermind/assets/115741651/878c5139-9a25-4d60-8482-a497b40cc3d2" alt="Winning Screen">
+    </td>
+  </tr>
+</table>
+
+**Settings Demo**: You can change the parameters of the game however you like! 
+
+![SettingsMM](https://github.com/tthcodes/Mastermind/assets/115741651/4eded940-fd71-456a-8338-ffba3765e169)
 
 ## Features, MVP, and Stretch Features 🏁
 
