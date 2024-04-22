@@ -82,6 +82,8 @@ You can run tests to inspect code reliability by running the following in your t
 
 **Account Page**: Profile page that allows players to change password or delete account.
 
+
+
 **Game Play Demo**: 
 
 **Game Over Demo**:
