@@ -74,16 +74,18 @@ You can run tests to inspect code reliability by running the following in your t
 
 **Instructions Page**: How to play page that describes gameplay mechanics and rules.
 
+<img width="621" alt="Screenshot 2024-04-22 at 5 18 46 PM" src="https://github.com/tthcodes/Mastermind/assets/115741651/b9e371e3-8672-4821-8301-94afc461c108">
+
 **Sign Up Page**: Sign up page that allows players to register an account.
 
 <img width="649" alt="Screenshot 2024-04-22 at 2 09 25 PM" src="https://github.com/tthcodes/Mastermind/assets/115741651/dd45e186-5613-4a96-888c-f6f06473a03a">
 
 **Login Page**: Login page allowing returning players to log in.
 
+
 **Account Page**: Profile page that allows players to change password or delete account.
 
 <img width="624" alt="Screenshot 2024-04-22 at 5 22 10 PM" src="https://github.com/tthcodes/Mastermind/assets/115741651/5172f06e-ea0f-4953-b98f-53ed629256e9">
-
 
 **Game Play Demo**: 
 
