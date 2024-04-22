@@ -43,7 +43,7 @@ If you require assistance in installing system requirements, refer to these link
     MONGODB_URI=your_mongodb_uri
     SESSION_SECRET=your_session_secret
   ```
-   **NOTE**: It is important that you add your new '.env' file to your .gitignore if you're intending on committing your code to public repositories. 
+  ❗️**NOTE**: It is important that you add your new '.env' file to your .gitignore if you're intending on committing your code to public repositories.❗️
 
 4. Build and start the application:
 ```bash
