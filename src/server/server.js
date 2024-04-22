@@ -13,10 +13,10 @@ import rateLimit from 'express-rate-limit'
 
 console.log('FROM SERVER.JS... process.env.MONGODB_URI:', process.env.MONGODB_URI)
 // Environment variable validation
-if (!process.env.MONGODB_URI) {
-  console.error('ERR: Missing MONGODB_URI in environment');
-  process.exit(1);
-};
+// if (!process.env.MONGODB_URI) {
+//   console.error('ERR: Missing MONGODB_URI in environment');
+//   process.exit(1);
+// };
 
 // Check environment mode
 const MODE = process.env.NODE_ENV || 'development'
