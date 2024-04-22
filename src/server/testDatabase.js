@@ -7,9 +7,9 @@ const connectToTestDB = async() => {
   const uri = mongoServer.getUri();
 
   try {
-    console.log('Connecting to Test DB...');
+    // console.log('Connecting to Test DB...');
     await mongoose.connect(uri, { dbName: 'TestUserDB' });
-    console.log ('Connected to Test DB!');
+    // console.log ('Connected to Test DB!');
   } catch (error) {
     console.error(`Failed to connect to Test DB: ${error}`);
     process.exit(1);
