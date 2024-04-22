@@ -58,7 +58,7 @@ If you require assistance in installing system requirements, refer to these link
 ```
   - This will automatically run your application using Webpack on [http://localhost:4000]. 
 
-## Testing ✅
+## Testing 🗂
 
 You can run tests to inspect code reliability by running the following in your terminal:
 
@@ -68,27 +68,27 @@ You can run tests to inspect code reliability by running the following in your t
 
 ## Demo and Screenshots 📸
 
-**Main Menu**: Home page on application load.
+**Main Menu**: Home page on application load. 💻
 
   <img width="642" alt="Screenshot 2024-04-22 at 2 08 13 PM" src="https://github.com/tthcodes/Mastermind/assets/115741651/ad8a6011-b2e8-4b9a-b431-331a61edacdb">
 
-**Instructions Page**: How to play page that describes gameplay mechanics and rules.
+**Instructions Page**: How to play page that describes gameplay mechanics and rules. 📄
 
 <img width="621" alt="Screenshot 2024-04-22 at 5 18 46 PM" src="https://github.com/tthcodes/Mastermind/assets/115741651/b9e371e3-8672-4821-8301-94afc461c108">
 
-**Sign Up Page**: Sign up page that allows players to register an account.
+**Sign Up Page**: Sign up page that allows players to register an account. 📩
 
 <img width="649" alt="Screenshot 2024-04-22 at 2 09 25 PM" src="https://github.com/tthcodes/Mastermind/assets/115741651/dd45e186-5613-4a96-888c-f6f06473a03a">
 
-**Login Page**: Login page allowing returning players to log in.
+**Login Page**: Login page allowing returning players to log in. 🔐
 
 <img width="646" alt="Screenshot 2024-04-22 at 2 09 10 PM" src="https://github.com/tthcodes/Mastermind/assets/115741651/b911db0a-251a-4191-bff9-ee6e887b2bf3">
 
-**Account Page**: Profile page that allows players to change password or delete account. (Once logged in)
+**Account Page**: Profile page that allows players to change password or delete account. (Once logged in) 👤
 
 <img width="624" alt="Screenshot 2024-04-22 at 5 22 10 PM" src="https://github.com/tthcodes/Mastermind/assets/115741651/5172f06e-ea0f-4953-b98f-53ed629256e9">
 
-**Game Play Demo**: Gameplay showing basic mechanics of the game.
+**Game Play Demo**: Gameplay showing basic mechanics of the game. 🎲
 
 ![gameplay](https://github.com/tthcodes/Mastermind/assets/115741651/5166e784-b0c7-4fae-9277-a312c89ca798)
 
@@ -96,16 +96,16 @@ You can run tests to inspect code reliability by running the following in your t
 
 <table>
   <tr>
-    <td><strong>Example of the player losing:</strong><br>
+    <td><strong>Example of the player losing: ❌ </strong><br>
       <img src="https://github.com/tthcodes/Mastermind/assets/115741651/b54304b1-5cc7-4665-b57b-e38ccddc43d7" alt="Losing Screen">
     </td>
-    <td><strong>Example of the player winning:</strong><br>
+    <td><strong>Example of the player winning: ✅</strong><br>
       <img src="https://github.com/tthcodes/Mastermind/assets/115741651/878c5139-9a25-4d60-8482-a497b40cc3d2" alt="Winning Screen">
     </td>
   </tr>
 </table>
 
-**Settings Demo**: You can change the parameters of the game however you like! 
+**Settings Demo**: You can change the parameters of the game however you like! ⚙️
 
 ![SettingsMM](https://github.com/tthcodes/Mastermind/assets/115741651/4eded940-fd71-456a-8338-ffba3765e169)
 
