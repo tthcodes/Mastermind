@@ -23,7 +23,6 @@ userController.getUser,
 userController.updateScore
 );
 
-
 // user delete requests (Delete account)
 userRouter.delete('/delete-account', 
 authController.authenticateUser,
