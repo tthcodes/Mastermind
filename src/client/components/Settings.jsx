@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
+import { Button } from '@mui/joy'; 
 import Typography from '@mui/material/Typography';
 import GameContext from '../contexts/GameContext';
 import containerStyle from '../styling/containerStyling';
@@ -58,12 +58,19 @@ const Settings = () => {
       flexDirection: 'column',
       alignItems: 'center',
       justifyContent: 'center',
+      height: '100vh'
       }}>
-      <Box sx={{ padding: 4, maxWidth: 500, margin: '0 auto', display: 'flex', flexDirection: 'column', gap: 2 }}>
+      <Box sx={{ 
+        padding: 4, 
+        maxWidth: 500, 
+        margin: '0 auto',
+        display: 'flex', 
+        flexDirection: 'column', gap: 2 }}>
 
         <Typography variant="h4" gutterBottom sx={{ 
           textDecoration: 'underline',
-          textAlign: 'center'
+          textAlign: 'center',
+          fontWeight: 'bold'
           }}>
             Game Settings
         </Typography>
@@ -96,9 +103,7 @@ const Settings = () => {
           <Button onClick={() => handleIncrement(localMaxNum, setLocalMaxNum, 9)}>+</Button>
         </Box>
 
-        <Button onClick={handleSave} variant="contained" sx={{ mt: 3 }}>Save Settings</Button>
-
-        <Button onClick={() => navigate(-1)} variant="contained" sx={{ mt: 1 }}>Back</Button>
+        <Button onClick={handleSave} variant="outlined" sx={{ mt: 3 }}>Save Settings</Button>
 
       </Box>
 
@@ -107,7 +112,18 @@ const Settings = () => {
             {error}
           </Typography>
         )}
-        
+      <Box sx={{
+        position: 'absolute',  // Absolute positioning can be used or adjust with margin-top for relative
+        bottom: 16,  // Adjusts the bottom position
+        left: '34%',  // Centers horizontally
+        transform: 'translateX(-50%)',  // Aligns center perfectly
+        width: 'auto',  // Adjusts width to fit content
+        mt: 4  // Adds margin-top to push down relative to content above if not using absolute
+      }}>
+        <Button variant="outlined" onClick={() => navigate(-1)} >
+          Back
+        </Button>
+      </Box>
     </Box>
   );
 };

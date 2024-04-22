@@ -1,1 +1,3 @@
-# Mastermind-LI
+# Welcome to my Mastermind game!
+
+## Install & Setup 🔧
