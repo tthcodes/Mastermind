@@ -6,6 +6,8 @@ const connectToTestDB = async() => {
   const mongoServer = await MongoMemoryServer.create();
   const uri = mongoServer.getUri();
 
+  process.env.MONGODB_URI = uri; // Change env variable for testing
+
   try {
     // console.log('Connecting to Test DB...');
     await mongoose.connect(uri, { dbName: 'TestUserDB' });
