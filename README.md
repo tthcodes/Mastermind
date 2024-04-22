@@ -82,6 +82,7 @@ You can run tests to inspect code reliability by running the following in your t
 
 **Account Page**: Profile page that allows players to change password or delete account.
 
+<img width="624" alt="Screenshot 2024-04-22 at 5 22 10 PM" src="https://github.com/tthcodes/Mastermind/assets/115741651/5172f06e-ea0f-4953-b98f-53ed629256e9">
 
 
 **Game Play Demo**: 
