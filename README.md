@@ -32,14 +32,19 @@ Before installing, ensure you have the following prerequisites installed:
 3. Set up local environment variables:
   - Create a local '.env' file in the root directory.
   - Ensure that you have created a local or remote MongoDB database and have a unique URI.
-  - This application leverages sessions to persist user data, generate your own unique session secret and store this in your '.env' file.
+  - This application leverages sessions to persist user data, generate your own unique session secret and store this in your '.env' file. This keeps your session secrets and MongoDB connections more secure.
   - Add the your unique keys into your new '.env' file (replace placeholders): 
   ```plaintext
     NODE_ENV=development
     MONGODB_URI=your_mongodb_uri
     SESSION_SECRET=your_session_secret
   ```
-  
+  - **NOTE**: It is important that you add your new '.env' file to your .gitignore if you're intending on committing your code to public repositories. 
+4. Build and start the application:
+```bash
+  $ npm build
+  $ npm start
+```
 
 <img width="642" alt="Screenshot 2024-04-22 at 2 08 13 PM" src="https://github.com/tthcodes/Mastermind/assets/115741651/ad8a6011-b2e8-4b9a-b431-331a61edacdb">
 
