@@ -111,4 +111,24 @@ You can run tests to inspect code reliability by running the following in your t
 
 ## Features, MVP, and Stretch Features 🏁
 
+### Game Features
+
+### MVP
+- [x] Generation of random sequence to use as the answer from random API.
+- [x] Ability for the player to submit guesses.
+- [x] Proper comparison between player guess and generated answer.
+- [x] Database and request logic for account creation, login, updating, and deletion.
+- [x] Logic to end game based on player guess count or if the guess is correct.
+
+## Stretch Features
+- [x] Settings page to change game parameters.
+- [x] Authentication of requests that manipulate user data.
+- [x] Changing the displayed game over the page depending on win or loss.
+- [x] Production mode vs. Development mode.
+- [x] Session creation to persist user data and logged-in status.
+- [x] Request traffic control (API Throttling).
+- [x] Integration testing for end-to-end codebase reliability.
+- [x] CORS configuration.
+- [] Deployment to global site.
+
 ## Journey, Roadblocks, and Lessons Learned 📆 
