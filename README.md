@@ -92,6 +92,8 @@ You can run tests to inspect code reliability by running the following in your t
 
 **Game Over Demo**:
 
+**Settings Demo**:
+
 ## Features, MVP, and Stretch Features 🏁
 
 ## Journey, Roadblocks, and Lessons Learned 📆 
