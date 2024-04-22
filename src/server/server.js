@@ -31,7 +31,7 @@ const PORT = process.env.PORT || 3000;
 const apiLimiter = rateLimit({
   windowMs: 2 * 60 * 1000, // defined window for requests
   max: 20, // max num of requests from each IP per window
-  message: 'Request limit reached, please try again after 5 minutes',
+  message: 'Request limit reached, please try again after 2 minutes.',
   standardHeaders: true,
   legacyHeaders: false
 });
