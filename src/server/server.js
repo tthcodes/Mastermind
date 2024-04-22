@@ -31,7 +31,7 @@ const PORT = process.env.PORT || 3000;
 // Define rate limiting parameters
 const apiLimiter = rateLimit({
   windowMs: 2 * 60 * 1000, // defined window for requests
-  max: 20, // max num of requests from each IP per window
+  max: 30, // max num of requests from each IP per window
   message: 'Request limit reached, please try again after 2 minutes.',
   standardHeaders: true,
   legacyHeaders: false
@@ -53,17 +53,13 @@ app.use(session({
   resave: false,
   saveUninitialized: false, //better for login sessions + complies with permission laws
   cookie: {
-    // Secure cookies in production mode, cookies sent over HTTPS connections only
-    secure: process.env.NODE_ENV === 'production',
+    // Secure cookies in production mode best practice, 
+      // cookies sent over HTTPS connections only.. but gave me trouble in production mode
+    // secure: process.env.NODE_ENV === 'production',
     httpOnly: true, // Protects against cross-site scripting, cookies inaccessible to JS
     maxAge: 1000 * 60 * 60 * 24 // Cookie valid for 24 hours
   }
 }));
-
-// Make root route always available 
-app.get('/', (req, res) => {
-  res.send('Home Page');
-});
 
 // Apply rate limiter to requests before routing to api router hub
 app.use('/api', apiLimiter, apiRouter)
@@ -75,10 +71,14 @@ if(MODE !== 'test'){
 
 // If in production mode, handle serving static files
 if (MODE === 'production') {
-    app.use(express.static(path.resolve(__dirname, '../../dist')));
-    app.get('*', (req, res) => res.sendFile(path.resolve(__dirname, '../../dist/index.html')));
+  app.use(express.static(path.resolve(__dirname, '../../dist')));
+  app.get('*', (req, res) => res.sendFile(path.resolve(__dirname, '../../dist/index.html')));
 } else {
-    console.log(`MODE IS IN ${MODE.toUpperCase()}`);
+  // Make root route always available if not in production mode.
+  app.get('/', (req, res) => {
+    res.send('Home Page');
+  });
+    console.log(`MODE IS CURRENTLY IN ${MODE.toUpperCase()}`);
 }
 
 // Error for no route matches
