@@ -62,17 +62,24 @@ You can run tests to inspect code reliability by running the following in your t
   $ npm test
 ```
 
-## Demo and Screenshots
+## Demo and Screenshots 📸
 
-**Main menu**
+**Main Menu**
 
-<div style="text-align: center">
   <img width="642" alt="Screenshot 2024-04-22 at 2 08 13 PM" src="https://github.com/tthcodes/Mastermind/assets/115741651/ad8a6011-b2e8-4b9a-b431-331a61edacdb">
-</div>
 
-## Features, MVP, and Stretch Features
+**Sign Up Page**
 
-## Lessons Learned, Journey, and Roadblocks 
+**Sign In Page**
 
+**Login Page**
 
+**Account Page**
 
+**Game Play Demo**
+
+**Game Over Demo**
+
+## Features, MVP, and Stretch Features 🏁
+
+## Lessons Learned, Journey, and Roadblocks 📆 
