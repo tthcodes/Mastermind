@@ -40,11 +40,36 @@ Before installing, ensure you have the following prerequisites installed:
     SESSION_SECRET=your_session_secret
   ```
    **NOTE**: It is important that you add your new '.env' file to your .gitignore if you're intending on committing your code to public repositories. 
+
 4. Build and start the application:
 ```bash
-  $ npm build
-  $ npm start
+  $ npm run build
+  $ npm run start
+```
+  - Once started, navigate to [http://localhost:3000] to start playing. 
+  - If production mode is giving you trouble, you also have the option to run the game in dev mode:
+
+```bash
+  $ npm run dev
+```
+  - This will automatically run your application using Webpack on [http://localhost:4000]. 
+
+## Testing ✅
+
+You can run tests to inspect code reliability by running the following in your terminal:
+
+```bash
+  $ npm test
 ```
 
+## Demo and Screenshots
+
+**Main menu**
 <img width="642" alt="Screenshot 2024-04-22 at 2 08 13 PM" src="https://github.com/tthcodes/Mastermind/assets/115741651/ad8a6011-b2e8-4b9a-b431-331a61edacdb">
+
+## Features, MVP, and Stretch Features
+
+## Lessons Learned, Journey, and Roadblocks 
+
+
 
