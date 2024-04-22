@@ -11,7 +11,6 @@ import MongoStore from 'connect-mongo';
 import cors from 'cors'; // Should i put this in routers for more granular approach?
 import rateLimit from 'express-rate-limit'
 
-process.env.MONGODB_URI='mongodb+srv://huynh2016:bMZv1lvtPUxiAUas@userdb.xq39e8k.mongodb.net/?retryWrites=true&w=majority&appName=UserDB'
 // Environment variable validation
 if (!process.env.MONGODB_URI) {
   console.error('ERR: Missing MONGODB_URI in environment');
