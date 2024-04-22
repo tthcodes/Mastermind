@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
+import { Button } from '@mui/joy'; 
 import Typography from '@mui/material/Typography';
 import GameContext from '../contexts/GameContext';
 import containerStyle from '../styling/containerStyling';
@@ -63,7 +63,8 @@ const Settings = () => {
 
         <Typography variant="h4" gutterBottom sx={{ 
           textDecoration: 'underline',
-          textAlign: 'center'
+          textAlign: 'center',
+          fontWeight: 'bold'
           }}>
             Game Settings
         </Typography>
@@ -96,9 +97,7 @@ const Settings = () => {
           <Button onClick={() => handleIncrement(localMaxNum, setLocalMaxNum, 9)}>+</Button>
         </Box>
 
-        <Button onClick={handleSave} variant="contained" sx={{ mt: 3 }}>Save Settings</Button>
-
-        <Button onClick={() => navigate(-1)} variant="contained" sx={{ mt: 1 }}>Back</Button>
+        <Button onClick={handleSave} variant="outlined" sx={{ mt: 3 }}>Save Settings</Button>
 
       </Box>
 
@@ -107,7 +106,16 @@ const Settings = () => {
             {error}
           </Typography>
         )}
-        
+      <Box sx={{
+        position: 'absolute', // Absolute positioning within the relatively positioned Box
+        left: 285, // Move it to the left side with some margin
+        bottom: 20, // Place it at the bottom with some margin
+        width: 'auto', // Auto width according to content
+      }}>
+        <Button variant="outlined" onClick={() => navigate(-1)} >
+          Back
+        </Button>
+      </Box>
     </Box>
   );
 };
