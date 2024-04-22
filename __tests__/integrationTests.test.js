@@ -4,7 +4,7 @@ import request from 'supertest';
 // Consideration: it would probably be better practice to do data cleanup before each describe block
   // to improve test reliability and isolation... 
   // For now, only doing in-memory database cleanup after all tests ran
-  
+
 // Consideration: could also have added negative testing and error handling tests..
 
 describe('Application Loads Up Properly', () => {
@@ -148,5 +148,29 @@ describe('All requests that initialize or require user authentication', () => {
     // Make sure delete account message is present as successful
     expect(deleteAccountResponse.status).toBe(200);
     expect(deleteAccountResponse._body.message).toBe('Account deleted.');
+  });
+});
+
+describe('Play page successfully generates valid random combination as answer', () => {
+
+  // Check if returned response body is an array
+  it('Should generate an array', async() => {
+    const generatedAnswerResponse = await request(app).get('/api/generate-answer/?length=4&min=0&max=7');
+    expect(Array.isArray(generatedAnswerResponse._body)).toBe(true);
+  });
+
+  // Check that all elements in that array are integers
+  it('Array returned should contain only integers', async() => {
+    const generatedAnswerResponse = await request(app).get('/api/generate-answer/?length=4&min=0&max=7');
+    let allNumbers = generatedAnswerResponse._body.every(el => typeof el === 'number');
+    expect(allNumbers).toBe(true);
+  });
+
+  // Check if generated answer numbers are between 0 and 7
+  it('Array returned should contain a min of 0 and a max of 7', async() => {
+    const generatedAnswerResponse = await request(app).get('/api/generate-answer/?length=4&min=0&max=7');
+    let answerArr = generatedAnswerResponse._body;
+    expect(Math.min(...answerArr) >= 0).toBe(true);
+    expect(Math.max(...answerArr) <= 7).toBe(true);
   });
 });
