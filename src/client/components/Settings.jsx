@@ -57,13 +57,12 @@ const Settings = () => {
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
-      justifyContent: 'center',
-      height: '100vh'
+      justifyContent: 'space-between',
       }}>
       <Box sx={{ 
         padding: 4, 
         maxWidth: 500, 
-        margin: '0 auto',
+        margin: 'auto',
         display: 'flex', 
         flexDirection: 'column', gap: 2 }}>
 
@@ -113,12 +112,10 @@ const Settings = () => {
           </Typography>
         )}
       <Box sx={{
-        position: 'absolute',  // Absolute positioning can be used or adjust with margin-top for relative
-        bottom: 16,  // Adjusts the bottom position
-        left: '34%',  // Centers horizontally
-        transform: 'translateX(-50%)',  // Aligns center perfectly
-        width: 'auto',  // Adjusts width to fit content
-        mt: 4  // Adds margin-top to push down relative to content above if not using absolute
+        width: '100%',
+        p: 3,
+        textAlign: 'left', // Align the button to the left,
+        marginLeft: '30px'
       }}>
         <Button variant="outlined" onClick={() => navigate(-1)} >
           Back
