@@ -82,4 +82,4 @@ You can run tests to inspect code reliability by running the following in your t
 
 ## Features, MVP, and Stretch Features 🏁
 
-## Lessons Learned, Journey, and Roadblocks 📆 
+## Journey, Roadblocks, and Lessons Learned 📆 
