@@ -1,6 +1,8 @@
 # Welcome to my Mastermind game! 🎮
 This is my iteration of the Mastermind game - a code-breaking game that challenges players to guess the correct number sequence!
 
+## How To Play
+
 The rules are as follows:
 - You will guess a 4-digit number sequence once the game starts. (Numbers can range from 0 ➡️ 7)
 - The computer has already generated a random, correct number sequence. It is unknown to you. (THERE CAN BE DUPLICATES!)
