@@ -1,6 +1,15 @@
 # Welcome to my Mastermind game! 🎮
 This is my iteration of the Mastermind game - a code-breaking game that challenges players to guess the correct number sequence!
 
+The rules are as follows:
+- You will guess a 4-digit number sequence once the game starts. (Numbers can range from 0 ➡️ 7)
+- The computer has already generated a random, correct number sequence. It is unknown to you. (THERE CAN BE DUPLICATES!)
+- You have a limited number of guesses, and the amount of guesses remaining should be shown to you.
+- After each guess, you will get feedback clueing you in on how close you were.
+- The feedback contains 2 relevant numbers: how many digits of your guess were correct numbers, and how many digits were in the correct location (index).
+
+You can configure game settings as well! This means you can increase/decrease the number of available guesses, how many digits are in the correct sequence, etc.
+
 ## Tech Stack 💻
 **Frontend**: HTML, CSS, JavaScript/React
 
