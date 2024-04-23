@@ -133,7 +133,7 @@ const userController = {
     };
   },
   
-  changePassword: async(req, res,) => {
+  changePassword: async(req, res, next) => {
     try {
       // getUser will be invoked before this, so we will have user document in req object
       // oldpassword, and new password from req.body, and user obj from req.user
