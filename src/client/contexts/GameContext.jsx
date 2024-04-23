@@ -1,5 +1,10 @@
 import React, { createContext } from 'react';
 
+// Provider in App.jsx should override these defaults with stateful logic using React
+// Even though we set these values in App.jsx, we will use this 
+  // as fallback default values for any component consuming context NOT wrapped in provider
+  // useful for isolation and testing
+
 const defContext = {
   answer: [],
   setAnswer: () => {},
@@ -15,7 +20,7 @@ const defContext = {
   setIsSignedIn: () => {}
 }
 
-//Create context
+// Create context and export, helps us avoid prop drilling
 const GameContext = createContext(defContext);
 
 export default GameContext

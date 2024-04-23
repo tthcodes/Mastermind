@@ -8,10 +8,10 @@ import axios from 'axios'
 
 const Home = () => {
   const {isSignedIn, setIsSignedIn} = useContext(GameContext)
-  const navigate = useNavigate();
   const [ userData, setUserData ] = useState({ username: 'default', score: -1 });
+  const navigate = useNavigate();
 
-  // Upon home component load, fetch user's data to display in U
+  // Upon home component load, fetch user's data to display in UI
   useEffect(() => {
     const fetchUserData = async () => {
       if (isSignedIn) {

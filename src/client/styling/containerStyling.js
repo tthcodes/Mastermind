@@ -1,13 +1,14 @@
 // MUI Styling for Outer Box Containing App
+
 const containerStyle = {
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
   justifyContent: 'space-between',
-  maxWidth: '600px',
-  width: '800px',
+  maxWidth: '700px',
+  width: '600px',
   height: '800px',
-  borderRadius: '14px',
+  borderRadius: '10px',
   border: '2px solid black'
 };
 

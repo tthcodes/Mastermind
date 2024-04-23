@@ -5,7 +5,7 @@ import GameContext from '../contexts/GameContext';
 
 const GuessSubmit = ({ length, onFormSubmit, guessCount }) => {
   const [inputs, setInputs] = useState(Array(length).fill(''));
-  const inputRefs = useRef([]); // new concept
+  const inputRefs = useRef([]); 
   const { maxGuessCount } = useContext(GameContext);
 
   const handleInputChange = (index, value) => {
