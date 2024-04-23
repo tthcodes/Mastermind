@@ -68,25 +68,16 @@ You can run tests to inspect code reliability by running the following in your t
 
 ## Demo and Screenshots 📸
 
-**Main Menu**: Home page on application load. 💻
+**Main Menu and Instructions Page** 💻
 
-  <img width="642" alt="Screenshot 2024-04-22 at 2 08 13 PM" src="https://github.com/tthcodes/Mastermind/assets/115741651/ad8a6011-b2e8-4b9a-b431-331a61edacdb">
+<img width="400" alt="Screenshot 2024-04-22 at 2 08 13 PM" src="https://github.com/tthcodes/Mastermind/assets/115741651/ad8a6011-b2e8-4b9a-b431-331a61edacdb">
+<img width="400" alt="Screenshot 2024-04-22 at 5 18 46 PM" src="https://github.com/tthcodes/Mastermind/assets/115741651/b9e371e3-8672-4821-8301-94afc461c108">
 
-**Instructions Page**: How to play page that describes gameplay mechanics and rules. 📄
+**Sign Up, Login, and Profile Pages** 🔐
 
-<img width="621" alt="Screenshot 2024-04-22 at 5 18 46 PM" src="https://github.com/tthcodes/Mastermind/assets/115741651/b9e371e3-8672-4821-8301-94afc461c108">
-
-**Sign Up Page**: Sign up page that allows players to register an account. 📩
-
-<img width="649" alt="Screenshot 2024-04-22 at 2 09 25 PM" src="https://github.com/tthcodes/Mastermind/assets/115741651/dd45e186-5613-4a96-888c-f6f06473a03a">
-
-**Login Page**: Login page allowing returning players to log in. 🔐
-
-<img width="646" alt="Screenshot 2024-04-22 at 2 09 10 PM" src="https://github.com/tthcodes/Mastermind/assets/115741651/b911db0a-251a-4191-bff9-ee6e887b2bf3">
-
-**Account Page**: Profile page that allows players to change password or delete account. (Once logged in) 👤
-
-<img width="624" alt="Screenshot 2024-04-22 at 5 22 10 PM" src="https://github.com/tthcodes/Mastermind/assets/115741651/5172f06e-ea0f-4953-b98f-53ed629256e9">
+<img width="355" alt="Screenshot 2024-04-22 at 2 09 25 PM" src="https://github.com/tthcodes/Mastermind/assets/115741651/dd45e186-5613-4a96-888c-f6f06473a03a">
+<img width="355" alt="Screenshot 2024-04-22 at 2 09 10 PM" src="https://github.com/tthcodes/Mastermind/assets/115741651/b911db0a-251a-4191-bff9-ee6e887b2bf3">
+<img width="355" alt="Screenshot 2024-04-22 at 5 22 10 PM" src="https://github.com/tthcodes/Mastermind/assets/115741651/5172f06e-ea0f-4953-b98f-53ed629256e9">
 
 **Game Play Demo**: Gameplay showing basic mechanics of the game. 🎲
 
@@ -109,6 +100,11 @@ You can run tests to inspect code reliability by running the following in your t
 
 ![SettingsMM](https://github.com/tthcodes/Mastermind/assets/115741651/4eded940-fd71-456a-8338-ffba3765e169)
 
+## Code Structure
+
+### API Architecture
+
+
 ## Game Features (MVP and Stretch Features) 🏁
 
 ### MVP
@@ -127,9 +123,13 @@ You can run tests to inspect code reliability by running the following in your t
 - [x] Request traffic control (API Throttling).
 - [x] Integration testing for end-to-end codebase reliability.
 - [x] CORS configuration.
+- [x] Sanitation of inputs to protect against data injection.
 - [ ] Leaderboard
-- [ ] Have settings saved
+- [ ] Have player settings saved to session data or database if logged in. (Not just game state)
 - [ ] Deployment to global site.
 - [ ] Load balancing
 
 ## Journey, Roadblocks, and Lessons Learned 📆 
+### Building Progress
+* Day 1 - 3 (Design, Setup, Basic Game Logic)
+  > The first day was spent designing my API and UI. I had considered building this project in Python since it has become my preferred language for algorithms, but I was a stranger to Django and Flask. I decided due to time constraints that finding my way around a new framework would not be a wise decision. I settled on my familiarity when it came to building a project and this was JavaScript, React, Node,
