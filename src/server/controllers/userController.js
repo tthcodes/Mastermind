@@ -141,8 +141,8 @@ const userController = {
       const { _id, password } = req.user;
 
       // Keep log for demo purposes
-      console.log('old:', oldPassword)
-      console.log('new:', newPassword)
+      console.log('old password input:', oldPassword)
+      console.log('new password input:', newPassword)
 
       // compare oldPassword client input to existing password in database
       // for bcrypt.compare(), 1st param is STRING INPUT, 2nd param is existing HASHED database pw

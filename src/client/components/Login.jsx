@@ -38,15 +38,20 @@ const Login = () => {
       setIsSignedIn(true);
 
     } catch (err) {
-      console.error('Error during login:', err);
-      
-      // If server sends back response, setError and show err message from backend
-      if(err.response) {
-        setError(err.response.data.message);
-        
-      } else {
-        setError('Failed to log in.');
-      }
+        console.error('Error during login:', err);
+        // If server sends back response, setError and show err message from backend
+        if(err.response) {
+          // Check if error was caught in validation handler during sanitation
+          const message = err.response.data.errors ? 
+              // Set message to validation handler message if so
+                'Inputs are not valid. (Should contain standard characters and no spaces)' : 
+              // Set fallback general error message
+                err.response.data.message;
+          setError(message);
+        } else {
+          // General error message for if error not sent with response
+          setError('Failed to log in.');
+        }
     }
   }
 

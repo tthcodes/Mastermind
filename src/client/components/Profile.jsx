@@ -37,8 +37,21 @@ const Profile = () => {
   const handleChangePassword = async (event) => {
     event.preventDefault();
 
+    // Make sure all fields have inputs
     if (!oldPassword || !newPassword) {
       setError('Please fill in all fields for password change.');
+      return;
+    }
+    
+    // Make sure old password and new password aren't the same
+    if (oldPassword === newPassword) {
+      setError('New password cannot be the same as old password.');
+      return;
+    }
+
+    // Make sure new password doesn't contain spaces
+    if (/\s/.test(newPassword)) {
+      setError('New password cannot contain spaces.')
       return;
     }
 
@@ -50,14 +63,26 @@ const Profile = () => {
       // Let client know password change was successful
       alert(response.data.message);
 
-      // Clear input fields
+      // Clear input fields and error message
       setOldPassword('');
       setNewPassword('');
+      setError('');
+
     } catch (err) {
-      console.error('Error during password change:', err);
-      setError(err.response ? err.response.data.message : 'Failed to change password.');
-    }
-  };
+        console.error('Error during password change:', err);
+        if(err.response){
+        // Check if error was caught in validation handler during sanitation
+        const message = err.response.data.errors ? 
+          'Inputs are not valid. (Should contain standard characters and no spaces)' : 
+        // Set fallback general error message if no validation handler error
+          err.response.data.message;
+          setError(message);
+        } else {
+          // General error message for errors with no response 
+          setError('Failed to log in:', err);
+        }
+      }
+    };
 
   const handleDeleteAccount = async (event) => {
     event.preventDefault();
@@ -80,10 +105,22 @@ const Profile = () => {
 
       navigate('/');
     } catch (err) {
-      console.error('Error during account deletion:', err.response.data.message);
-      setError(err.response ? err.response.data.message : 'Failed to delete account.');
-    }
-  };
+        console.error('Error delete account:', err);
+        // Check if err contains response
+        if(err.response){
+        // Check if error was caught in validation handler during sanitation
+        const message = err.response.data.errors ? 
+        // Set message to validation handler message if so
+          'Inputs are not valid. (Should contain standard characters and no spaces)' : 
+        // Set fallback general error message if not
+          err.response.data.message;
+          setError(message);
+        } else {
+          // General error message for errors with no response 
+          setError('Failed to log in:', err);
+        }
+      }
+    };
 
   return (
     <Box sx={{ position: 'relative', ...containerStyle}}>

@@ -21,11 +21,13 @@ userRouter.get('/get-user-data',
 userRouter.post('/sign-up', [
     body('username')
       .trim()
+      .isString()
       .notEmpty()
       .matches(/^[a-zA-Z0-9_!@#$%^&*()]+$/), // Ensures input data is a-z, A-Z, 0-9, or special chars
 
     body('password')
       .trim()
+      .isString()
       .notEmpty()
       .matches(/^[a-zA-Z0-9_!@#$%^&*()]+$/),
   ], 
@@ -36,11 +38,13 @@ userRouter.post('/sign-up', [
 userRouter.post('/login', [
     body('username')
       .trim()
+      .isString()
       .notEmpty()
       .matches(/^[a-zA-Z0-9_!@#$%^&*()]+$/),
 
     body('password')
       .trim()
+      .isString()
       .notEmpty()
       .matches(/^[a-zA-Z0-9_!@#$%^&*()]+$/),
   ], 
@@ -54,11 +58,13 @@ userRouter.post('/logout', userController.logout);
 userRouter.patch('/change-password', [
     body('oldPassword')
       .trim()
+      .isString()
       .notEmpty()
       .matches(/^[a-zA-Z0-9_!@#$%^&*()]+$/),
 
     body('newPassword')
       .trim()
+      .isString()
       .notEmpty()
       .matches(/^[a-zA-Z0-9_!@#$%^&*()]+$/),
   ],
@@ -78,15 +84,14 @@ userController.updateScore
 userRouter.delete('/delete-account', [
     body('deletePassword')
       .trim()
+      .isString()
       .notEmpty()
-      .matches(/^[a-zA-Z0-9_]+$/),
+      .matches(/^[a-zA-Z0-9_!@#$%^&*()]+$/),
   ],
   validationHandler,
   authController.authenticateUser,
   userController.getUser,
   userController.deleteAccount
 );
-
-
 
 export default userRouter;
