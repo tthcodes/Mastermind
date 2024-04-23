@@ -9,7 +9,7 @@ const userRouter = express.Router();
 
 // Validate and sanitize any requests that contain client-input data in req.body
 
-// User get request, called on page load to verify user account info and personalize UI, protect
+// User get request, called on page load to verify user account info and personalize UI, protect route
 userRouter.get('/get-user-data', 
   authController.authenticateUser, 
   userController.getUser, 
@@ -22,12 +22,12 @@ userRouter.post('/sign-up', [
     body('username')
       .trim()
       .notEmpty()
-      .matches(/^[a-zA-Z0-9_]+$/),
+      .matches(/^[a-zA-Z0-9_!@#$%^&*()]+$/), // Ensures input data is a-z, A-Z, 0-9, or special chars
 
     body('password')
       .trim()
       .notEmpty()
-      .matches(/^[a-zA-Z0-9_]+$/),
+      .matches(/^[a-zA-Z0-9_!@#$%^&*()]+$/),
   ], 
   validationHandler,
   userController.signUp
@@ -37,12 +37,12 @@ userRouter.post('/login', [
     body('username')
       .trim()
       .notEmpty()
-      .matches(/^[a-zA-Z0-9_]+$/),
+      .matches(/^[a-zA-Z0-9_!@#$%^&*()]+$/),
 
     body('password')
       .trim()
       .notEmpty()
-      .matches(/^[a-zA-Z0-9_]+$/),
+      .matches(/^[a-zA-Z0-9_!@#$%^&*()]+$/),
   ], 
   validationHandler,
   userController.signIn
@@ -50,17 +50,17 @@ userRouter.post('/login', [
 
 userRouter.post('/logout', userController.logout);
 
-// User patch requests (Change password, Update win totals), protect
+// User patch requests (Change password, Update win totals), protect route
 userRouter.patch('/change-password', [
     body('oldPassword')
       .trim()
       .notEmpty()
-      .matches(/^[a-zA-Z0-9_]+$/),
+      .matches(/^[a-zA-Z0-9_!@#$%^&*()]+$/),
 
     body('newPassword')
       .trim()
       .notEmpty()
-      .matches(/^[a-zA-Z0-9_]+$/),
+      .matches(/^[a-zA-Z0-9_!@#$%^&*()]+$/),
   ],
   validationHandler,
   authController.authenticateUser, 
@@ -74,7 +74,7 @@ userController.getUser,
 userController.updateScore
 );
 
-// User delete requests (Delete account), protect
+// User delete requests (Delete account), protect route
 userRouter.delete('/delete-account', [
     body('deletePassword')
       .trim()
