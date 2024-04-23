@@ -127,7 +127,8 @@ You can run tests to inspect code reliability by running the following in your t
 - [ ] Leaderboard
 - [ ] Have player settings saved to session data or database if logged in. (Not just game state)
 - [ ] Deployment to global site.
-- [ ] Load balancing
+- [ ] Load balancing.
+- [ ] File-based logging.
 
 ## Lessons Learned 📆 
 
