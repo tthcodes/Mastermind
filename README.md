@@ -71,7 +71,7 @@ You can run tests to inspect code reliability by running the following in your t
 **Main Menu and Instructions Page** 💻
 
 <img width="400" alt="Screenshot 2024-04-22 at 2 08 13 PM" src="https://github.com/tthcodes/Mastermind/assets/115741651/ad8a6011-b2e8-4b9a-b431-331a61edacdb">
-<img width="400" alt="Screenshot 2024-04-22 at 5 18 46 PM" src="https://github.com/tthcodes/Mastermind/assets/115741651/b9e371e3-8672-4821-8301-94afc461c108">
+<img width="370" alt="Screenshot 2024-04-22 at 5 18 46 PM" src="https://github.com/tthcodes/Mastermind/assets/115741651/b9e371e3-8672-4821-8301-94afc461c108">
 
 **Sign Up, Login, and Profile Pages** 🔐
 
@@ -154,6 +154,6 @@ This game implementation did not come without its challenges!
   
 - Speaking of deploying, I regretfully spent almost a whole day trying to do this as well. Setting up a CI/CD pipeline seemed simple enough with the prospect of using GitHub actions. However, for some reason, every bundle would either fail to build or my tests would fail. I even went on to try to deploy my game onto Heroku manually, without a pipeline, yet to no avail. I decided to take my losses on this one and accepted that with the time constraint, it wasn't worth spending more time than I already had on trying to deploy.
 
-Overall, this experience was an amazing opportunity to build something challenging, while also broadening my knowledge in backend considerations. I've always had an appreciation for behind-the-scenes logic, and learning the importance of protecting your users, and their data, and creating a robust application has made me fall in love with backend engineering philosophy all over again. 🩶
+Overall, this experience was an incredible opportunity to tackle something challenging and expand my understanding of backend considerations. I've always appreciated the logic that operates behind the scenes, but deepening my knowledge about protecting users, safeguarding their data, and building a robust application has grown my passion for backend engineering philosophy even more. 🩶
 
 On a final note, I'd like to thank LinkedIn and the interviewers for their time and consideration. I truly have gained so much knowledge and confidence in myself through completing this challenge. 🫱🏻‍🫲🏼
