@@ -55,7 +55,7 @@ const GameOver = () => {
           {message}
         </Typography>
 
-        {isSignedIn ? (
+        {isSignedIn && winner ? (
         <Typography sx = {{
           fontWeight: 'bold',
           marginTop: 4,

@@ -31,6 +31,12 @@ const SignUp = () => {
       setError('Please fill in all fields.');
       return;
     }
+
+    // Make sure username and password do not contain spaces
+    if (/\s/.test(password) || /\s/.test(username)) {
+      setError('Password and Username cannot contain spaces.')
+      return;
+    }
     
     // Utilize user's input birthday state variables to calculate age
     const userBirthday = new Date(birthYear, birthMonth - 1, birthDay); // Date object based on user bday
