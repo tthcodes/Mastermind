@@ -56,7 +56,7 @@ app.use(session({
       // cookies sent over HTTPS connections only.. but gave me trouble in production mode
     // secure: process.env.NODE_ENV === 'production',
     httpOnly: true, // Protects against cross-site scripting, cookies inaccessible to JS
-    maxAge: 1000 * 60 * 60 * 24 // Cookie valid for 24 hours
+    maxAge: 1000 * 60 * 60 * 5 // Cookie valid for 5 hours
   }
 }));
 
