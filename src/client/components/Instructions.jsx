@@ -1,8 +1,8 @@
 import React from 'react';
-import { Box, Typography, List, ListItem, ListItemText } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
-import { Button } from '@mui/joy';  
 import containerStyle from '../styling/containerStyling';
+import { Box, Typography, List, ListItem, ListItemText } from '@mui/material';
+import { Button } from '@mui/joy';  
+import { useNavigate } from 'react-router-dom';
 
 const Instructions = () => {
   const navigate = useNavigate();

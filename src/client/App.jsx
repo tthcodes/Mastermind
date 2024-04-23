@@ -3,7 +3,9 @@ import { Routes, Route } from 'react-router-dom';
 import GameContext from './contexts/GameContext';
 import axios from 'axios';
 
-//Use dynamic imports using React.lazy for components associated with routes
+// Use dynamic imports using React.lazy for components associated with routes, only loaded when needed
+  // Improves initial load performance by code splitting. 
+  // Reduces initial bundle size, app becomes interactive quicker
 const Home = lazy(() => import('./components/Home'))
 const Play = lazy(() => import('./components/Play'))
 const GameOver = lazy(() => import('./components/GameOver'))
@@ -16,7 +18,8 @@ const Settings = lazy(() => import('./components/Settings'))
 
 
 const App = () => {
-  // Define State Variables from Context
+  // Define Global state variables to be used by GameContext, 
+    // this links them to their set funcs and sets a default val 
   const [answer, setAnswer] = useState([]);
   const [numCount, setNumCount] = useState(4);
   const [maxGuessCount, setMaxGuessCount] = useState(10);
@@ -46,7 +49,7 @@ const App = () => {
     verifySession();
   }, [setIsSignedIn]); 
 
-  // Store State Variables In Object To Pass Down In Provider
+  // Store state variables and set funcs in obj to later pass to Game Context Provider
   const value = {
     answer,
     setAnswer,
@@ -61,6 +64,9 @@ const App = () => {
     isSignedIn,
     setIsSignedIn
   };
+
+  // Wrap components in GameContext Provider to pass down global state variabls and setter funcs
+  // Lazy designed to work with 'Suspense' to specify loading fallback. (displayed while components fetched)
 
   return (
     <GameContext.Provider value={value}>

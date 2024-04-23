@@ -2,9 +2,9 @@ import dotenv from 'dotenv';
 dotenv.config() // Load environment variables
 
 import express from 'express';
+import connectToDB from './database.js';
 import { fileURLToPath } from 'url';
 import path from 'path';
-import connectToDB from './database.js';
 import apiRouter from './routers/apiRouter.js';
 import session from 'express-session';
 import MongoStore from 'connect-mongo';
@@ -32,7 +32,7 @@ const apiLimiter = rateLimit({
   windowMs: 2 * 60 * 1000, // defined window for requests
   max: 30, // max num of requests from each IP per window
   message: 'Request limit reached, please try again after 2 minutes.',
-  standardHeaders: true,
+  standardHeaders: 'draft-7',
   legacyHeaders: false
 });
 
@@ -56,7 +56,7 @@ app.use(session({
       // cookies sent over HTTPS connections only.. but gave me trouble in production mode
     // secure: process.env.NODE_ENV === 'production',
     httpOnly: true, // Protects against cross-site scripting, cookies inaccessible to JS
-    maxAge: 1000 * 60 * 60 * 24 // Cookie valid for 24 hours
+    maxAge: 1000 * 60 * 60 * 5 // Cookie valid for 5 hours
   }
 }));
 

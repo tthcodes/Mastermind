@@ -47,7 +47,10 @@ const Profile = () => {
         oldPassword,
         newPassword
       });
+      // Let client know password change was successful
       alert(response.data.message);
+
+      // Clear input fields
       setOldPassword('');
       setNewPassword('');
     } catch (err) {
@@ -66,8 +69,15 @@ const Profile = () => {
     try {
       // Have to specifically configure .delete requests to have an object.. in this case, to confirm password matches
       const response = await axios.delete('/api/user/delete-account', {data: { deletePassword }});
+     
+      // Let client know account deletion was successful
       alert(response.data.message);
+
+      // Change global state variable isSignedIn to false
       setIsSignedIn(false);
+
+      // Navigate player back to home screen (session should be destroyed)
+
       navigate('/');
     } catch (err) {
       console.error('Error during account deletion:', err.response.data.message);
@@ -82,19 +92,17 @@ const Profile = () => {
       </Typography>
       {error && (
         <Typography color="error" sx={{
-          position: 'absolute',
-          top: '51vh', // Adjust top as necessary to position the error message
-          right: 0, // Adjust right to align the message as you prefer
-          width: '100%', // Ensure it spans the full container width if necessary
-          textAlign: 'center', // Center the text
-          background: 'rgba(255, 255, 255, 0.8)', // Optional: add a semi-transparent background
-          zIndex: 2 // Ensure it sits above other elements
+          top: '51vh', 
+          right: 0, 
+          width: '100%',
+          textAlign: 'center',
+          zIndex: 2 
         }}>
           {error}
         </Typography>
       )}
       <form onSubmit={handleChangePassword} style={{ width: '60%', display: 'flex', flexDirection: 'column', gap: '8px' }}>
-        Change Password?
+        Want a new password?
         <TextField
           label="Old Password"
           fullWidth
@@ -112,7 +120,7 @@ const Profile = () => {
         </Button>
       </form>
       <form onSubmit={handleDeleteAccount} style={{ width: '60%', display: 'flex', flexDirection: 'column', gap: '8px' }}>
-        Delete Account?
+        Want to delete your account?
         <TextField
           label="Password"
           fullWidth
