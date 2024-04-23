@@ -71,12 +71,12 @@ You can run tests to inspect code reliability by running the following in your t
 **Main Menu and Instructions Page** 💻
 
 <img width="400" alt="Screenshot 2024-04-22 at 2 08 13 PM" src="https://github.com/tthcodes/Mastermind/assets/115741651/ad8a6011-b2e8-4b9a-b431-331a61edacdb">
-<img width="370" alt="Screenshot 2024-04-22 at 5 18 46 PM" src="https://github.com/tthcodes/Mastermind/assets/115741651/b9e371e3-8672-4821-8301-94afc461c108">
+<img width="391" alt="Screenshot 2024-04-22 at 5 18 46 PM" src="https://github.com/tthcodes/Mastermind/assets/115741651/b9e371e3-8672-4821-8301-94afc461c108">
 
 **Sign Up, Login, and Profile Pages** 🔐
 
 <img width="355" alt="Screenshot 2024-04-22 at 2 09 25 PM" src="https://github.com/tthcodes/Mastermind/assets/115741651/dd45e186-5613-4a96-888c-f6f06473a03a">
-<img width="355" alt="Screenshot 2024-04-22 at 2 09 10 PM" src="https://github.com/tthcodes/Mastermind/assets/115741651/b911db0a-251a-4191-bff9-ee6e887b2bf3">
+<img width="352" alt="Screenshot 2024-04-22 at 2 09 10 PM" src="https://github.com/tthcodes/Mastermind/assets/115741651/b911db0a-251a-4191-bff9-ee6e887b2bf3">
 <img width="355" alt="Screenshot 2024-04-22 at 5 22 10 PM" src="https://github.com/tthcodes/Mastermind/assets/115741651/5172f06e-ea0f-4953-b98f-53ed629256e9">
 
 **Game Play Demo**: Gameplay showing basic mechanics of the game. 🎲
@@ -153,6 +153,8 @@ This game implementation did not come without its challenges!
 - Testing itself took me almost a whole day. Mostly because I had done research and found that it was best practice to test your application, without actually interacting with your persisting database. Figuring out how to set up Jest files to play nice with ES Module syntax, as well as setting up an in-memory Mongo database instance was super frustrating. Eventually, I was able to configure Jest config files to connect to a database instance by creating a separate testDatabase.js - which is used to start and stop the database instance. This way, my tests weren't interacting with my actual database which was expected to be used by real users!
   
 - Speaking of deploying, I regretfully spent almost a whole day trying to do this as well. Setting up a CI/CD pipeline seemed simple enough with the prospect of using GitHub actions. However, for some reason, every bundle would either fail to build or my tests would fail. I even went on to try to deploy my game onto Heroku manually, without a pipeline, yet to no avail. I decided to take my losses on this one and accepted that with the time constraint, it wasn't worth spending more time than I already had on trying to deploy.
+
+### Final Thoughts 🍻
 
 Overall, this experience was an incredible opportunity to tackle something challenging and expand my understanding of backend considerations. I've always appreciated the logic that operates behind the scenes, but deepening my knowledge about protecting users, safeguarding their data, and building a robust application has grown my passion for backend engineering philosophy even more. 🩶
 
