@@ -109,9 +109,7 @@ You can run tests to inspect code reliability by running the following in your t
 
 ![SettingsMM](https://github.com/tthcodes/Mastermind/assets/115741651/4eded940-fd71-456a-8338-ffba3765e169)
 
-## Features, MVP, and Stretch Features 🏁
-
-### Game Features
+## Game Features (MVP and Stretch Features) 🏁
 
 ### MVP
 - [x] Generation of random sequence to use as the answer from random API.
@@ -131,6 +129,7 @@ You can run tests to inspect code reliability by running the following in your t
 - [x] CORS configuration.
 - [ ] Leaderboard
 - [ ] Have settings saved
-- [] Deployment to global site.
+- [ ] Deployment to global site.
+- [ ] Load balancing
 
 ## Journey, Roadblocks, and Lessons Learned 📆 
