@@ -68,25 +68,16 @@ You can run tests to inspect code reliability by running the following in your t
 
 ## Demo and Screenshots 📸
 
-**Main Menu**: Home page on application load. 💻
+**Main Menu and Instructions Page** 💻
 
-  <img width="642" alt="Screenshot 2024-04-22 at 2 08 13 PM" src="https://github.com/tthcodes/Mastermind/assets/115741651/ad8a6011-b2e8-4b9a-b431-331a61edacdb">
+<img width="400" alt="Screenshot 2024-04-22 at 2 08 13 PM" src="https://github.com/tthcodes/Mastermind/assets/115741651/ad8a6011-b2e8-4b9a-b431-331a61edacdb">
+<img width="391" alt="Screenshot 2024-04-22 at 5 18 46 PM" src="https://github.com/tthcodes/Mastermind/assets/115741651/b9e371e3-8672-4821-8301-94afc461c108">
 
-**Instructions Page**: How to play page that describes gameplay mechanics and rules. 📄
+**Sign Up, Login, and Profile Pages** 🔐
 
-<img width="621" alt="Screenshot 2024-04-22 at 5 18 46 PM" src="https://github.com/tthcodes/Mastermind/assets/115741651/b9e371e3-8672-4821-8301-94afc461c108">
-
-**Sign Up Page**: Sign up page that allows players to register an account. 📩
-
-<img width="649" alt="Screenshot 2024-04-22 at 2 09 25 PM" src="https://github.com/tthcodes/Mastermind/assets/115741651/dd45e186-5613-4a96-888c-f6f06473a03a">
-
-**Login Page**: Login page allowing returning players to log in. 🔐
-
-<img width="646" alt="Screenshot 2024-04-22 at 2 09 10 PM" src="https://github.com/tthcodes/Mastermind/assets/115741651/b911db0a-251a-4191-bff9-ee6e887b2bf3">
-
-**Account Page**: Profile page that allows players to change password or delete account. (Once logged in) 👤
-
-<img width="624" alt="Screenshot 2024-04-22 at 5 22 10 PM" src="https://github.com/tthcodes/Mastermind/assets/115741651/5172f06e-ea0f-4953-b98f-53ed629256e9">
+<img width="355" alt="Screenshot 2024-04-22 at 2 09 25 PM" src="https://github.com/tthcodes/Mastermind/assets/115741651/dd45e186-5613-4a96-888c-f6f06473a03a">
+<img width="352" alt="Screenshot 2024-04-22 at 2 09 10 PM" src="https://github.com/tthcodes/Mastermind/assets/115741651/b911db0a-251a-4191-bff9-ee6e887b2bf3">
+<img width="355" alt="Screenshot 2024-04-22 at 5 22 10 PM" src="https://github.com/tthcodes/Mastermind/assets/115741651/5172f06e-ea0f-4953-b98f-53ed629256e9">
 
 **Game Play Demo**: Gameplay showing basic mechanics of the game. 🎲
 
@@ -109,27 +100,62 @@ You can run tests to inspect code reliability by running the following in your t
 
 ![SettingsMM](https://github.com/tthcodes/Mastermind/assets/115741651/4eded940-fd71-456a-8338-ffba3765e169)
 
+## API Architecture
+
+![Screenshot 2024-04-23 at 2 47 22 AM](https://github.com/tthcodes/Mastermind/assets/115741651/15ca88f7-1a06-4ded-aae3-957f0d78b905)
+
 ## Game Features (MVP and Stretch Features) 🏁
 
-### MVP
+### MVP 🚨
 - [x] Generation of random sequence to use as the answer from random API.
 - [x] Ability for the player to submit guesses.
 - [x] Proper comparison between player guess and generated answer.
 - [x] Database and request logic for account creation, login, updating, and deletion.
 - [x] Logic to end game based on player guess count or if the guess is correct.
 
-## Stretch Features
-- [x] Settings page to change game parameters.
-- [x] Authentication of requests that manipulate user data.
+## Stretch Features 🏇
 - [x] Changing the displayed game over the page depending on win or loss.
-- [x] Production mode vs. Development mode.
+- [x] Keeping and updating of user score if logged in.
+- [x] Authentication of HTTP requests that manipulate user data by protecting routes.
+- [x] Settings page to change game parameters.
 - [x] Session creation to persist user data and logged-in status.
-- [x] Request traffic control (API Throttling).
-- [x] Integration testing for end-to-end codebase reliability.
+- [x] Production mode (build, start) vs. Development mode (dev).
+- [x] API traffic control (Rate limiting).
+- [x] Testing using Jest to increase codebase reliability.
 - [x] CORS configuration.
+- [x] Sanitation of client data inputs to protect against malicious data injection.
 - [ ] Leaderboard
-- [ ] Have settings saved
+- [ ] Have player settings saved to session data or database if logged in. (Not just game state)
 - [ ] Deployment to global site.
 - [ ] Load balancing
 
-## Journey, Roadblocks, and Lessons Learned 📆 
+## Lessons Learned 📆 
+
+### Building Journey 🛠
+
+* Day 1 - 3 (Design, Setup, Basic Game Logic, Settings)
+  > The first day was spent designing my API architecture and UI. I had considered building this project in Python since it has become my preferred language for algorithms, but I was a stranger to Django and Flask. I decided due to time constraints that finding my way around a new framework would not be wise. I settled on my familiarity when it came to building a project and this was in JavaScript/React and Node/Express. Much of this first phase was spent setting up and implementing basic game logic. Before moving onto account setup implementation, I also wanted to allow users to change the parameters of the game rules - which led to the settings page you see today!
+  
+* Day 4 - 5 (Account creation, User Data Manipulation, Authentication, Data Persistence)
+  > After I had basic game mechanisms implemented, I wanted to fully leverage the backend to manipulate and transfer data. I wondered how I could add features that would make use of my remote MongoDB database to increase user experience. This led me to implement a feature to create an account and log in. This would allow returning players to keep track of their wins as well. Once users were able to log in, I had to start thinking about how to authenticate players before allowing them access to their previous data, as well as how I could protect player's data. This led me to leverage bcrypt to hash user passwords and create sessions with MongoStore. Now users were able to remain logged in even after reloads or server restarts (as long as their cookie was valid).
+  
+* Day 6-7 (Testing, CORS, API Throttling, Data Sanitation, ReadME)
+  > I knew that if time permitted, I wanted to get to creating tests with Jest. My main concern for the game was making sure my HTTP requests were hitting all of my routers and middleware as expected. I leveraged Jest, in combination with MongoDB's ability to create an in-memory database instance, to test all of my end-to-end logic. Once I was satisfied with my test coverage, I went on to researching other ways I could increase my application's security. I added CORS configuration, rate limiting, and data sanitation using tools provided by Express. Finally, I wanted to shift my attention to this README that you're reading currently! If given more time, there were a handful of things I would've liked to add, and you can see these in my stretch features column.
+
+### Roadblocks 😓
+
+This game implementation did not come without its challenges! 
+
+- Firstly, setting up Webpack, and overall making sure that my front-end logic was being configured to proxy my API was a headache. It took hours to find where I was going wrong in my webpack.config.js file.
+  
+- Being able to serve up the application in production mode, after building, proved difficult as well. Most of the time I had spent in development mode. It wasn't until I thought about the prospect of deploying later on down the road that I wanted my server to be able to differentiate between production and development. Once again, I found myself spending hours between my set-up files, .env file, package.json files, and server files - and was finally able to build and serve the application without Webpack!
+  
+- Testing itself took me almost a whole day. Mostly because I had done research and found that it was best practice to test your application, without actually interacting with your persisting database. Figuring out how to set up Jest files to play nice with ES Module syntax, as well as setting up an in-memory Mongo database instance was super frustrating. Eventually, I was able to configure Jest config files to connect to a database instance by creating a separate testDatabase.js - which is used to start and stop the database instance. This way, my tests weren't interacting with my actual database which was expected to be used by real users!
+  
+- Speaking of deploying, I regretfully spent almost a whole day trying to do this as well. Setting up a CI/CD pipeline seemed simple enough with the prospect of using GitHub actions. However, for some reason, every bundle would either fail to build or my tests would fail. I even went on to try to deploy my game onto Heroku manually, without a pipeline, yet to no avail. I decided to take my losses on this one and accepted that with the time constraint, it wasn't worth spending more time than I already had on trying to deploy.
+
+### Final Thoughts 🍻
+
+Overall, this experience was an incredible opportunity to tackle something challenging and expand my understanding of backend considerations. I've always appreciated the logic that operates behind the scenes, but deepening my knowledge about protecting users, safeguarding their data, and building a robust application has grown my passion for backend engineering philosophy even more. 🩶
+
+On a final note, I'd like to thank LinkedIn and the interviewers for their time and consideration. I truly have gained so much knowledge and confidence in myself through completing this challenge. 🫱🏻‍🫲🏼
