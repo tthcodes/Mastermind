@@ -129,6 +129,8 @@ You can run tests to inspect code reliability by running the following in your t
 - [x] Request traffic control (API Throttling).
 - [x] Integration testing for end-to-end codebase reliability.
 - [x] CORS configuration.
+- [ ] Leaderboard
+- [ ] Have settings saved
 - [] Deployment to global site.
 
 ## Journey, Roadblocks, and Lessons Learned 📆 
