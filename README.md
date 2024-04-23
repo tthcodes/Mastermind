@@ -104,6 +104,7 @@ You can run tests to inspect code reliability by running the following in your t
 
 ### API Architecture
 
+![Screenshot 2024-04-23 at 2 47 22 AM](https://github.com/tthcodes/Mastermind/assets/115741651/15ca88f7-1a06-4ded-aae3-957f0d78b905)
 
 ## Game Features (MVP and Stretch Features) 🏁
 
@@ -121,7 +122,7 @@ You can run tests to inspect code reliability by running the following in your t
 - [x] Production mode vs. Development mode.
 - [x] Session creation to persist user data and logged-in status.
 - [x] Request traffic control (API Throttling).
-- [x] Integration testing for end-to-end codebase reliability.
+- [x] Testing using Jest to increase codebase reliability.
 - [x] CORS configuration.
 - [x] Sanitation of inputs to protect against data injection.
 - [ ] Leaderboard
