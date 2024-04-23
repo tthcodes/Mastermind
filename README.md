@@ -23,6 +23,17 @@ If you require assistance in installing system requirements, refer to these link
 - Node: [https://nodejs.org/en]
 - npm: [https://docs.npmjs.com/about-npm]
 
+Once Node & NPM are installed, you can confirm proper installation through your terminal with the following commands:
+
+This command should show your current version of Node
+```bash
+  $ node -v
+```
+This command should show your current version of NPM
+```bash
+  $ npm -v
+```
+
 ### Steps for game installation:
 1. Clone the repository:
 ```bash
