@@ -4,7 +4,7 @@ This is my iteration of the Mastermind game - a code-breaking game that challeng
 ## How To Play 🤖
 
 The rules are as follows:
-- You will guess a 4-digit number sequence once the game starts. (Numbers can range from 0 ➡️ 7)
+- You will guess a 4-digit number sequence once the game starts. (Numbers can range from 0  ➡️  7)
 - The computer has already generated a random, correct number sequence. It is unknown to you. (THERE CAN BE DUPLICATES!)
 - You have a limited number of guesses, and the amount of guesses remaining should be shown to you.
 - After each guess, you will get feedback clueing you in on how close you were to the correct answer sequence.
