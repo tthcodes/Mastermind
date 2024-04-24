@@ -138,18 +138,18 @@ You can run tests to inspect code reliability by running the following in your t
 - [x] Database connection and request logic for account creation, login, updating, and deletion.
 
 ## Stretch Features 🏇
-- [x] Changing the displayed game over the page depending on win or loss.
+- [x] Changing the displayed 'game-over' page depending on win or loss.
 - [x] Requiring age verification before sign-up (to reduce risk management in data collection).
 - [x] Keeping record and updating of user score for players that are logged in.
 - [x] Password hashing on account creation or changes to account password for increased data security.
 - [x] Authentication of HTTP requests that manipulate user data by protecting routes.
 - [x] Settings page to change game parameters.
-- [x] Session creation to persist user data and logged-in status.
+- [x] Session creation to persist user data and logged-in status - even on page reload, page close, or server restarts.
 - [x] Production mode (build, start) vs. Development mode (dev).
-- [x] API traffic control (Rate limiting).
+- [x] API traffic control (via Rate Limiter).
 - [x] Testing using Jest to increase codebase reliability.
 - [x] CORS configuration for increased security.
-- [x] Sanitation of player inputs on the backend to protect against malicious client-side data injection.
+- [x] Sanitation of player data inputs on the backend to protect against malicious client-side data injection.
 - [ ] Leaderboard
 - [ ] Have player settings saved to session data or database if logged in. (Not just game state)
 - [ ] Deployment to global site.
