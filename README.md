@@ -142,9 +142,9 @@ You can run tests to inspect code reliability by running the following in your t
 - [x] Requiring age verification before sign-up (to reduce risk management in data collection).
 - [x] Keeping record and updating of user score for players that are logged in.
 - [x] Password hashing on account creation or changes to account password for increased data security.
-- [x] Authentication of HTTP requests that manipulate user data by protecting routes.
+- [x] Authentication of player HTTP requests that manipulate sensitive player-related data by protecting routes.
 - [x] Settings page to change game parameters.
-- [x] Session creation to persist user data and logged-in status - even on page reload, page close, or server restarts.
+- [x] Session creation to persist player data and logged-in status - even on page reload, page close, or server restarts.
 - [x] Production mode (build, start) vs. Development mode (dev).
 - [x] API traffic control (via Rate Limiter).
 - [x] Testing using Jest to increase codebase reliability.
