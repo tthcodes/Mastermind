@@ -7,8 +7,8 @@ The rules are as follows:
 - You will guess a 4-digit number sequence once the game starts. (Numbers can range from 0 ➡️ 7)
 - The computer has already generated a random, correct number sequence. It is unknown to you. (THERE CAN BE DUPLICATES!)
 - You have a limited number of guesses, and the amount of guesses remaining should be shown to you.
-- After each guess, you will get feedback clueing you in on how close you were.
-- The feedback contains 2 relevant numbers: how many digits of your guess were correct numbers, and how many digits were in the correct location (index).
+- After each guess, you will get feedback clueing you in on how close you were to the correct answer sequence.
+- The feedback contains 2 relevant numbers: one representing how many digits of your guess were correct numbers, and the other representing how many digits in your guess were in the correct location.
 
 You can configure game settings as well! This means you can increase/decrease the number of available guesses, how many digits are in the correct sequence, etc.
 
@@ -65,7 +65,7 @@ This command should show your current version of NPM
     MONGODB_URI=your_mongodb_uri
     SESSION_SECRET=your_session_secret
   ```
-  ❗️**NOTE**: It's important to add your '.env' file to your .gitignore file if you plan on committing your code to public repositories.❗️
+  ❗️**NOTE**: Be sure to add your '.env' file to your .gitignore file if you plan on committing your code to public repositories❗️
 
 4. Build and start the application:
 ```bash
@@ -101,11 +101,11 @@ You can run tests to inspect code reliability by running the following in your t
 <img width="352" alt="Screenshot 2024-04-22 at 2 09 10 PM" src="https://github.com/tthcodes/Mastermind/assets/115741651/b911db0a-251a-4191-bff9-ee6e887b2bf3">
 <img width="355" alt="Screenshot 2024-04-22 at 5 22 10 PM" src="https://github.com/tthcodes/Mastermind/assets/115741651/5172f06e-ea0f-4953-b98f-53ed629256e9">
 
-**Game Play Demo**: Gameplay showing basic mechanics of the game. 🎲
+**Game Play Demo**: Gameplay showing basic mechanics of the game 🎲
 
 ![gameplay](https://github.com/tthcodes/Mastermind/assets/115741651/5166e784-b0c7-4fae-9277-a312c89ca798)
 
-**Game Over Demo**: Game over screen dynamically changes depending on if the player wins or loses.
+**Game Over Demo**: Game over screen dynamically changes depending on win condition.
 
 <table>
   <tr>
@@ -132,20 +132,24 @@ You can run tests to inspect code reliability by running the following in your t
 - [x] Generation of random sequence to use as the answer from random API.
 - [x] Ability for the player to submit guesses.
 - [x] Proper comparison between player guess and generated answer.
-- [x] Database and request logic for account creation, login, updating, and deletion.
 - [x] Logic to end game based on player guess count or if the guess is correct.
+- [x] Display feedback to player to provide clues as to how close their guess was.
+- [x] Provide a history log of previous guesses for the current game.
+- [x] Database connection and request logic for account creation, login, updating, and deletion.
 
 ## Stretch Features 🏇
 - [x] Changing the displayed game over the page depending on win or loss.
-- [x] Keeping and updating of user score if logged in.
+- [x] Requiring age verification before sign-up (to reduce risk management in data collection).
+- [x] Keeping record and updating of user score for players that are logged in.
+- [x] Password hashing on account creation or changes to account password for increased data security.
 - [x] Authentication of HTTP requests that manipulate user data by protecting routes.
 - [x] Settings page to change game parameters.
 - [x] Session creation to persist user data and logged-in status.
 - [x] Production mode (build, start) vs. Development mode (dev).
 - [x] API traffic control (Rate limiting).
 - [x] Testing using Jest to increase codebase reliability.
-- [x] CORS configuration.
-- [x] Sanitation of client data inputs to protect against malicious data injection.
+- [x] CORS configuration for increased security.
+- [x] Sanitation of player inputs on the backend to protect against malicious client-side data injection.
 - [ ] Leaderboard
 - [ ] Have player settings saved to session data or database if logged in. (Not just game state)
 - [ ] Deployment to global site.
