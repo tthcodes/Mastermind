@@ -16,10 +16,12 @@ const SignUp = () => {
   const [error, setError] = useState(''); 
 
   // Populate options in dropdowns for user to select birthday
-    //(_, i) is beginning of mapping function, first param serves as field placeholder, i is index of current val (begins at 0)
-  const months = Array.from({ length: 12 }, (_, i) => i + 1); // 12 months max
+    //(_, i) is beginning of mapping function caleed on each el, first param serves as field placeholder, i is index of current val (begins at 0)
+  const months = Array.from({ length: 12 }, (_, i) => i + 1); // 12 months max.. turns 0-11 to 1-12
   const days = Array.from({ length: 31 }, (_, i) => i + 1); // 31 days max
   const currentYear = new Date().getFullYear(); // Grab current date's year to as starting point for age in years
+
+  // Here we decrement starting from the grabbed current year above. 
   const years = Array.from({ length: 100 }, (_, i) => currentYear - i); // Get options beginning from current year
 
   // Function to handle submission of account info for creation
@@ -39,10 +41,13 @@ const SignUp = () => {
     }
     
     // Utilize user's input birthday state variables to calculate age
+      // Month needs to be subtracted from by 1, JS begins January at 0
     const userBirthday = new Date(birthYear, birthMonth - 1, birthDay); // Date object based on user bday
-    const ageDiff = Date.now() - userBirthday.getTime(); // Calculates diff between birth and current date in ms
+    const ageDiff = Date.now() - userBirthday.getTime(); // Calculates diff between birthday and current in ms
     const ageDate = new Date(ageDiff); // Creates new date object from age diff in ms
-    const userAge = Math.abs(ageDate.getUTCFullYear() - 1970) // Grab year from age diff, subtract 1970 due to Unix Epoch
+
+    // Because of the Unix Epoch (1970), ageDate is how many years since 1970 + user age
+    const userAge = Math.abs(ageDate.getUTCFullYear() - 1970) // Grab year from user age obj, subtract 1970 due to Unix Epoch
     
     // Verify user is at least 13 years old (considers COPPA, privacy act for children under 13)
     if (userAge < 13) {

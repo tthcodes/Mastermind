@@ -25,10 +25,12 @@ const Settings = () => {
     setLocalMaxNum(maxNum);
   }, [numCount, maxGuessCount, minNum, maxNum]);
 
+  // Helper func to increment game parameters, with max value param
   const handleIncrement = (value, setValue, max) => {
     if (value < max) setValue(value + 1);
   };
 
+  // Helper func to decrement game parameters, with min value param
   const handleDecrement = (value, setValue, min) => {
     if (value > min) setValue(value - 1);
   };
@@ -41,7 +43,7 @@ const Settings = () => {
       return;
     }
 
-    // Update game context using local values if save button clicked
+    // Update game context using local values if save button clicked and all checks passed
     setNumCount(localNumCount);
     setMaxGuessCount(localMaxGuessCount);
     setMinNum(localMinNum);
@@ -106,7 +108,9 @@ const Settings = () => {
 
       </Box>
 
-      {error && (
+      {error && ( 
+        // Conditional rendering using &&... component renders if error is truthy
+        // If left operand falsy, returns falsy val. If left operand truthy, evaluates and returns right operand
           <Typography color="error" sx={{ mt: 2 }}>
             {error}
           </Typography>

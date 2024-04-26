@@ -1,3 +1,5 @@
+// Create root to target div in index.html
+// Wrap App component in BrowserRouter to enable routing for page navigation (SPA structure)
 import App from './App';
 import React from 'react';
 import { createRoot } from 'react-dom/client';

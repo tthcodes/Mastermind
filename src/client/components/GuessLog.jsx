@@ -25,6 +25,7 @@ const GuessLog = ( { guessLog }) => {
       </Typography>
       <List>
         {guessLog.map((el, index) => {
+          // Each el = guess attempt, contains info on guess (num arr) + correctNum + correctLocs
           const [guess, correctNums, correctLocations] = el; // el = [[curr guess arr], correctNums, correctLocations]
           let secondary;
           if(correctNums === 0) {
