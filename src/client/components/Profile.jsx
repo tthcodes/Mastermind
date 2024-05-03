@@ -35,7 +35,7 @@ const Profile = () => {
 
   // Function to verify old password and change to new password if it matches
   const handleChangePassword = async (event) => {
-    event.preventDefault();
+    event.preventDefault(); // Prevents from reloading on submission
 
     // Make sure all fields have inputs
     if (!oldPassword || !newPassword) {
