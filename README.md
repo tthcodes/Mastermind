@@ -184,5 +184,3 @@ This game implementation did not come without its challenges!
 ### Final Thoughts 🍻
 
 Overall, this experience was an incredible opportunity to tackle something challenging and expand my understanding of backend considerations. I've always appreciated the logic that operates behind the scenes, but deepening my knowledge about protecting users, safeguarding their data, and building a robust application has grown my passion for backend engineering philosophy even more. 
-
-On a final note, I'd like to thank LinkedIn and the interviewers for their time and consideration. I truly have gained so much knowledge and confidence in myself through completing this challenge.
